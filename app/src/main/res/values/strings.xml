@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Foodify</string>
+    <string name="foodify_credits">Embedded Systems Programming<b>\nALAsoft\n\n</b><b>Cigagna Alessio,\nLerose Leonardo,\nMoretto Alberto.\n</b>\n<i>All rights reserved © 2017.</i></string>
+    <string name="starting_bill_dollars">0,00$</string>
+    <string name="starting_bill_euros">0,00€</string>
+    <string name="add_money">add money to your bill!</string>
 </resources>
