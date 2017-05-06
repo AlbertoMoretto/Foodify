@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mSettingsImageButton;
 
     private Toast creditToast;
-    private Intent billIntent;
+    private Intent billIntent, foodIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
                 openBill();
             }
         });
+
+        mFoodImageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                openFood();
+            }
+        });
+
         mAlaSoftImageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 creditToast = Toast.makeText(getApplicationContext(), R.string.foodify_credits, Toast.LENGTH_SHORT);
@@ -43,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void openBill(){
-        billIntent = new Intent(this, BillActivity.class);
+        billIntent = new Intent(this, AccountActivity.class);
         startActivity(billIntent);
+    }
+
+    private void openFood(){
+        foodIntent = new Intent(this, FoodActivity.class);
+        startActivity(foodIntent);
     }
 }

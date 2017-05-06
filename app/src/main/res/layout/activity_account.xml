@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.esp1617.albertomoretto.foodify.BillActivity">
+    tools:context="com.esp1617.albertomoretto.foodify.AccountActivity">
 
     <TextView
         android:id="@+id/bill_text_view"
@@ -18,6 +18,7 @@
         android:hint="@string/starting_bill_dollars"
         android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="@android:color/darker_gray"
         android:textSize="110sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

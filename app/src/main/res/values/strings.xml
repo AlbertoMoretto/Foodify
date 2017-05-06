@@ -4,4 +4,11 @@
     <string name="starting_bill_dollars">0,00$</string>
     <string name="starting_bill_euros">0,00€</string>
     <string name="add_money">add money to your bill!</string>
+    <string name="bill_label">Your Order:</string>
+    <string name="account_label">Your Account:</string>
+    <string name="hamburger_label">Hamburger</string>
+    <string name="hot_dog_label">Hot Dog</string>
+    <string name="fries_label">Fries</string>
+    <string name="drink_label">Drink</string>
+    <string name="dessert_label">Dessert</string>
 </resources>
