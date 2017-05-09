@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         mBillImageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                openBill();
+                openAccount();
             }
         });
 
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void openBill(){
+    public void openAccount(){
         billIntent = new Intent(this, AccountActivity.class);
         startActivity(billIntent);
     }

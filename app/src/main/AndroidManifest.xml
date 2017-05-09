@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".FoodActivity">
         </activity>
-        <activity android:name=".PopUpActivity">
+        <activity android:name=".PopUpActivity"
+            android:theme="@style/AppTheme.PopUp">
         </activity>
     </application>
 

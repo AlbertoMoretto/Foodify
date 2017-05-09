@@ -3,7 +3,7 @@
     <string name="foodify_credits">Embedded Systems Programming<b>\nALAsoft\n\n</b><b>Cigagna Alessio,\nLerose Leonardo,\nMoretto Alberto.\n</b>\n<i>All rights reserved © 2017.</i></string>
     <string name="starting_bill_dollars">0,00$</string>
     <string name="starting_bill_euros">0,00€</string>
-    <string name="add_money">add money to your bill!</string>
+    <string name="add_money">add money to your account!</string>
     <string name="bill_label">Your Order:</string>
     <string name="account_label">Your Account:</string>
     <string name="hamburger_label">Hamburger</string>
@@ -11,4 +11,29 @@
     <string name="fries_label">Fries</string>
     <string name="drink_label">Drink</string>
     <string name="dessert_label">Dessert</string>
+    <string name="bread_type">Bread type:</string>
+    <string name="meat_type">Meat type:</string>
+    <string name="onions_label">Onions</string>
+    <string name="tomatoes_label">Tomatoes</string>
+    <string name="cucumber_label">Cucumber</string>
+    <string name="salad_label">Salad</string>
+    <string name="confirm">Confirm</string>
+    <string name="bread_crumbs_label">Breadcrumbs</string>
+    <string name="mustard_label">Mustard</string>
+    <string name="mayo_label">Mayonnaise</string>
+    <string name="ketchup_label">Ketchup</string>
+    <string name="small_fries">Small Fries</string>
+    <string name="medium_fries">Medium Fries</string>
+    <string name="large_fries">Large Fries</string>
+    <string name="barbecue_sauce_label">Barbecue Sauce</string>
+    <string name="drink_size">Drink Size</string>
+    <string name="drink_type">Drink Type</string>
+    <string name="nougat_label">Nougat</string>
+    <string name="marshmellow_label">Marshmellow</string>
+    <string name="lollipop_label">Lollipop</string>
+    <string name="kit_kat_label">Kit-Kat</string>
+    <string name="jelly_bean_label">Jelly Bean</string>
+    <string name="ice_cream_sandwich_label">Ice Cream Sandwich</string>
+
+
 </resources>

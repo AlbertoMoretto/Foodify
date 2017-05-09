@@ -7,4 +7,15 @@
     android:layout_height="match_parent"
     tools:context="com.esp1617.albertomoretto.foodify.PopUpActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="129dp"
+        android:layout_height="115dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"/>
 </android.support.constraint.ConstraintLayout>
