@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class FoodActivity extends AppCompatActivity {
     private float savedAccountValue;
     private TextView mAccountTextView;
+    private Food hamburgers[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +20,6 @@ public class FoodActivity extends AppCompatActivity {
         Log.d("ddda", ""+savedAccountValue);
         mAccountTextView = (TextView) findViewById(R.id.account_value_text_view);
         mAccountTextView.setText(""+savedAccountValue+"$");
-
+        
     }
 }
