@@ -7,10 +7,12 @@ package com.esp1617.albertomoretto.foodify;
 public class Ingredient {
     private String name;
     private float price;
+    private String category; //{MEAT, BREAD, SAUCES, DRINKTYPE, DRINKSIZE}
 
-    public Ingredient(String name, float price) {
+    public Ingredient(String name, float price, String category) {
         this.name = name;
         this.price = price;
+        this.category = category;
     }
 
     public String getName() {
@@ -27,5 +29,13 @@ public class Ingredient {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

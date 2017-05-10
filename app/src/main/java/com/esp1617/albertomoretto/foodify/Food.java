@@ -26,9 +26,14 @@ public class Food {
         this.name = newName;
     }
 
-    public void addIngredient(Ingredient ingredient){
-        IngredientSelected i = new IngredientSelected(ingredient);
+    public void addIngredient(String name, float price, String category){
+        Ingredient newI = new Ingredient(name, price, category);
+        IngredientSelected i = new IngredientSelected(newI);
         ingredients.add(i);
+    }
+
+    public List<IngredientSelected> getIngredients() {
+        return ingredients;
     }
 
     public void setTotalPrice(){
@@ -36,13 +41,14 @@ public class Food {
             if(ingredients.get(i).getSelected()) totalPrice+=ingredients.get(i).getIngredientName().getPrice();
 
         }
+
     }
 
 
 
 
 
-    private class IngredientSelected{
+    protected class IngredientSelected{
         private Ingredient ingredientName;
         private boolean selected;
 
