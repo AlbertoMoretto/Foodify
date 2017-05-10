@@ -8,4 +8,5 @@ public class FoodifyConstants {
     public static final float STANDARD_ACCOUNT_UPDATE_VALUE = 1.5f;
     public static final float DEFAULT_ACCOUNT_VALUE = 0.0f;
     public static final float DEFAULT_MEDIUM_PRICE = 10.0f;
+    public static final int MAX_FOOD_INGREDIENTS_SIZE = 15;
 }
