@@ -23,9 +23,10 @@ public class PopUpActivity extends AppCompatActivity {
     private Food dessert;
 
     private Spinner mMeatSpinner;
+    private Spinner mBreadSpinner;
 
-    ArrayAdapter<String> adapter;
-    List<String> list;
+    ArrayAdapter<String> breadAdapter, meatAdapter;
+    List<String> breadList, meatList;
 
 
     @Override
@@ -46,21 +47,38 @@ public class PopUpActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_pop_up_hamburger);
                 //hamburger = new Food(Resources.getSystem().getString(R.string.hamburger_label));
                 hamburger = new Food("hamburger");
+
+                hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_BUCKWHEAT_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_BUCKWHEAT_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
+                hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_SESAME_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_SESAME_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
+                hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_WHOLE_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_WHOLE_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
+
+                mBreadSpinner = (Spinner) findViewById(R.id.bread_type_spinner);
+                breadList = new ArrayList<String>();
+                List<Food.IngredientSelected> hamburgerList= hamburger.getIngredients();
+                for(int i =0; i<hamburgerList.size(); i++){
+                    if(hamburgerList.get(i).getIngredientName().getCategory().equals(FoodifyConstants.BREAD_CATEGORY)) {
+                        breadList.add(hamburgerList.get(i).getIngredientName().getName());
+                    }
+                }
+                breadAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, breadList);
+                breadAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mBreadSpinner.setAdapter(breadAdapter);
+
                 hamburger.addIngredient(FoodifyConstants.MEAT_HABURGER_CLASSIC_NAME, FoodifyConstants.MEAT_HABURGER_CLASSIC_PRICE, FoodifyConstants.MEAT_CATEGORY);
                 hamburger.addIngredient(FoodifyConstants.MEAT_HABURGER_DOUBLE_NAME, FoodifyConstants.MEAT_HABURGER_DOUBLE_PRICE, FoodifyConstants.MEAT_CATEGORY);
                 hamburger.addIngredient(FoodifyConstants.MEAT_HABURGER_JUICY_NAME, FoodifyConstants.MEAT_HABURGER_JUICY_PRICE, FoodifyConstants.MEAT_CATEGORY);
 
                 mMeatSpinner = (Spinner) findViewById(R.id.meat_type_spinner);
-                list = new ArrayList<String>();
-                List<Food.IngredientSelected> hamburgerList= hamburger.getIngredients();
+                meatList = new ArrayList<String>();
+                //List<Food.IngredientSelected> hamburgerList= hamburger.getIngredients();
                 for(int i =0; i<hamburgerList.size(); i++){
                     if(hamburgerList.get(i).getIngredientName().getCategory().equals(FoodifyConstants.MEAT_CATEGORY)) {
-                        list.add(hamburgerList.get(i).getIngredientName().getName());
+                        meatList.add(hamburgerList.get(i).getIngredientName().getName());
                     }
                 }
-                adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                mMeatSpinner.setAdapter(adapter);
+                meatAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, meatList);
+                meatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mMeatSpinner.setAdapter(meatAdapter);
 
                 getWindow().setLayout((int) (width * .8), (int) (height * .6));
                 break;
