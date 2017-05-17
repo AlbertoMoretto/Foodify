@@ -35,5 +35,14 @@
     <string name="jelly_bean_label">Jelly Bean</string>
     <string name="ice_cream_sandwich_label">Ice Cream Sandwich</string>
 
+    <!-- Notification strings -->
+    <string name="simple_notification_title_template">Dove sei finito?!</string>
+    <string name="simple_notification_placeholder_text_template">
+        Il cibo non va sprecato! …e poi ci devi dei soldi.
+    </string>
+
+    <string name="action_share">Share</string>
+    <string name="action_reply">Reply</string>
+
 
 </resources>
