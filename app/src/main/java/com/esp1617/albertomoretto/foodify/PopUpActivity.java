@@ -24,9 +24,11 @@ public class PopUpActivity extends AppCompatActivity {
 
     private Spinner mMeatSpinner;
     private Spinner mBreadSpinner;
+    private Spinner mSizeSpinner;
+    private Spinner mTypeSpinner;
 
-    ArrayAdapter<String> breadAdapter, meatAdapter;
-    List<String> breadList, meatList;
+    ArrayAdapter<String> breadAdapter, meatAdapter, sizeAdapter, typeAdapter;
+    List<String> breadList, meatList,sizeList, typeList;
 
 
     @Override
@@ -95,6 +97,38 @@ public class PopUpActivity extends AppCompatActivity {
 
             case FoodifyTags.DRINK:
                 setContentView(R.layout.activity_pop_up_drink);
+                drink = new Food("drink");
+                drink.addIngredient(FoodifyConstants.DRINK_SIZE_SMALL_NAME, FoodifyConstants.DRINK_SIZE_SMALL_PRICE, FoodifyConstants.SIZE_CATEGORY);
+                drink.addIngredient(FoodifyConstants.DRINK_SIZE_MEDIUM_NAME, FoodifyConstants.DRINK_SIZE_MEDIUM_PRICE, FoodifyConstants.SIZE_CATEGORY);
+                drink.addIngredient(FoodifyConstants.DRINK_SIZE_LARGE_NAME, FoodifyConstants.DRINK_SIZE_LARGE_PRICE, FoodifyConstants.SIZE_CATEGORY);
+
+                mSizeSpinner = (Spinner) findViewById(R.id.drink_size_spinner);
+                sizeList = new ArrayList<String>();
+                List<Food.IngredientSelected> drinkList= drink.getIngredients();
+                for(int i=0; i<drinkList.size();i++) {
+                    if(drinkList.get(i).getIngredientName().getCategory().equals(FoodifyConstants.SIZE_CATEGORY)) {
+                        sizeList.add(drinkList.get(i).getIngredientName().getName());
+                    }
+                }
+                sizeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,sizeList);
+                sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mSizeSpinner.setAdapter(sizeAdapter);
+
+                drink.addIngredient(FoodifyConstants.DRINK_TYPE_COKE_NAME,FoodifyConstants.DRINK_TYPE_COKE_PRICE,FoodifyConstants.TYPE_CATEGORY);
+                drink.addIngredient(FoodifyConstants.DRINK_TYPE_DIET_COKE_NAME,FoodifyConstants.DRINK_TYPE_DIET_COKE_PRICE,FoodifyConstants.TYPE_CATEGORY);
+                drink.addIngredient(FoodifyConstants.DRINK_TYPE_SPRITE_NAME,FoodifyConstants.DRINK_TYPE_SPRITE_PRICE,FoodifyConstants.TYPE_CATEGORY);
+                drink.addIngredient(FoodifyConstants.DRINK_TYPE_WATER_NAME,FoodifyConstants.DRINK_TYPE_WATER_PRICE,FoodifyConstants.TYPE_CATEGORY);
+
+                mTypeSpinner = (Spinner) findViewById(R.id.drink_type_spinner);
+                typeList = new ArrayList<String>();
+                for(int i=0; i<drinkList.size();i++) {
+                    if(drinkList.get(i).getIngredientName().getCategory().equals(FoodifyConstants.TYPE_CATEGORY)) {
+                        typeList.add(drinkList.get(i).getIngredientName().getName());
+                    }
+                }
+                typeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,typeList);
+                typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                mTypeSpinner.setAdapter(typeAdapter);
                 getWindow().setLayout((int) (width * .6), (int) (height * .4));
                 break;
 

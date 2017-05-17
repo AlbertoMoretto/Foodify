@@ -26,8 +26,8 @@
     <string name="medium_fries">Medium Fries</string>
     <string name="large_fries">Large Fries</string>
     <string name="barbecue_sauce_label">Barbecue Sauce</string>
-    <string name="drink_size">Drink Size</string>
-    <string name="drink_type">Drink Type</string>
+    <string name="drink_size">Drink Size:</string>
+    <string name="drink_type">Drink Type:</string>
     <string name="nougat_label">Nougat</string>
     <string name="marshmellow_label">Marshmellow</string>
     <string name="lollipop_label">Lollipop</string>
