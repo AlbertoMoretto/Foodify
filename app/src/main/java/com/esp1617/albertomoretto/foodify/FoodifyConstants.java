@@ -22,6 +22,7 @@ public class FoodifyConstants {
 
     public static final String BREAD_CATEGORY = "Bread";
     public static final String MEAT_CATEGORY ="Meat";
+    public static final String ADDITION_CATEGORY = "Addition";
 
     public static final float BREAD_HAMBURGER_SESAME_BREAD_PRICE = 2;
     public static final float BREAD_HAMBURGER_WHOLE_BREAD_PRICE = 2.5f;
@@ -51,5 +52,45 @@ public class FoodifyConstants {
     public static final float DRINK_TYPE_DIET_COKE_PRICE = 2;
     public static final float DRINK_TYPE_SPRITE_PRICE = 1.5f;
     public static final float DRINK_TYPE_WATER_PRICE = 0.5f;
+
+    public static final String SALAD = "Salad";
+    public static final String TOMATOES = "Tomatoes";
+    public static final String ONIONS = "Onions";
+    public static final String CUCUMBER = "Cucumber";
+    public static final String BREADCRUMBS = "BreadCrumbs";
+    public static final String MUSTARD = "Mustard";
+    public static final String MAYONNAISE = "Mayonnaise";
+    public static final String KETCHUP = "Ketchup";
+    public static final String BARBECUE_SAUCE = "Barbecue Sauce";
+    public static final String ICE_CREAM_SANDWICH = "Ice Cream Sandwich";
+    public static final String JELLY_BEAN = "Jally Bean";
+    public static final String KIT_KAT = "Kit-kat";
+    public static final String LOLLIPOP = "Lollipop";
+    public static final String MARSHMELLOW = "Marshmellow";
+    public static final String NOUGAT = "Nougat";
+
+    public static final float SALAD_PRICE = 0.5f;
+    public static final float TOMATOES_PRICE = 0.5f;
+    public static final float ONIONS_PRICE = 0.5f;
+    public static final float CUCUMBER_PRICE = 0.5f;
+    public static final float BREADCRUMS_PRICE = 1;
+    public static final float MUSTARD_PRICE = 1;
+    public static final float MAYONNAISE_PRICE = 1;
+    public static final float KETCHUP_PRICE = 1;
+    public static final float BARBECUE_SAUCE_PRICE = 1;
+    public static final float ICE_CREAM_SANDWICH_PRICE = 3;
+    public static final float JALLY_BEAN_PRICE = 2.5f;
+    public static final float KIT_KAT_PRICE = 2f;
+    public static final float LOLLIPOP_PRICE = 1.5f;
+    public static final float MARSHMELLOW_PRICE = 3f;
+    public static final float NOUGAT_PRICE = 3.5f;
+
+
+
+
+
+
+
+
 
 }

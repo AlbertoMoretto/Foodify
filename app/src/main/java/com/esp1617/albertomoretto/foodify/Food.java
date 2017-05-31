@@ -32,6 +32,13 @@ public class Food {
         ingredients.add(i);
     }
 
+
+    public void setIngredientSelected(String name, boolean value){
+        for(int i = 0; i<ingredients.size(); i++){
+            if(ingredients.get(i).getIngredientName().getName().equals(name)) ingredients.get(i).setSelected(value);
+        }
+    }
+
     public List<IngredientSelected> getIngredients() {
         return ingredients;
     }
@@ -44,9 +51,23 @@ public class Food {
 
     }
 
+    public float getTotalPrice() {
+        return totalPrice;
+    }
 
-
-
+    @Override
+    public String toString() {
+        String ingredientList="";
+        for(int i = 0; i<ingredients.size(); i++){
+            ingredientList+=(ingredients.get(i).getIngredientName().getName())+"--->"+(ingredients.get(i).getIngredientName().getPrice())+"--->"+(ingredients.get(i).getSelected());
+            ingredientList+="\n";
+        }
+        return "Food{" +
+                "name='" + name + '\'' +
+                ", " + ingredientList+
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 
     protected class IngredientSelected{
         private Ingredient ingredientName;
@@ -56,13 +77,13 @@ public class Food {
             ingredientName = ingredient;
             selected = false;
         }
-        public void setIngredientSelected(){
-            selected = true;
+        public void setSelected(boolean value){
+            selected = value;
         }
 
-        public void setIngredientDeselected(){
+        /*public void setDeselected(){
             selected = false;
-        }
+        }*/
 
         public boolean getSelected(){
             return selected;

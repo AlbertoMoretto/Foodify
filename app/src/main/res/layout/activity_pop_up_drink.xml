@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewDrink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -22,7 +22,7 @@
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewDrinkSize"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -46,7 +46,7 @@
         android:layout_gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewDrinkType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,7 +79,7 @@
             android:layout_gravity="center"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonConfirmDrink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

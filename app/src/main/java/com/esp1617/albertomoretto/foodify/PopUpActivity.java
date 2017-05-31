@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -27,8 +30,40 @@ public class PopUpActivity extends AppCompatActivity {
     private Spinner mSizeSpinner;
     private Spinner mTypeSpinner;
 
+    private Button confirmHamburger;
+    private Button confirmHotdog;
+    private Button confirmDrink;
+    private Button confirmDessert;
+    private Button confirmFries;
+
+    //hamburger checkbox
+    private CheckBox checkboxSalad;
+    private CheckBox checkboxTomatoes;
+    private CheckBox checkboxHamburgerOnions;
+    private CheckBox checkboxCucumber;
+
+    //hotdog checkbox
+    private CheckBox checkboxBreadCrumbs;
+    private CheckBox checkboxHotdogHonions;
+    private CheckBox checkboxMustard;
+    private CheckBox getCheckboxHotdogMayo;
+    private CheckBox getGetCheckboxHotdogKetchup;
+
+    //fries checkbox
+    private CheckBox checkboxFriesMayo;
+    private CheckBox checkboxFriesKetchup;
+    private CheckBox checkboxBarbecueSauce;
+
+    //dessert checkbox
+    private CheckBox checkboxIceCream;
+    private CheckBox checkboxJallyBean;
+    private CheckBox checkboxKitkat;
+    private CheckBox checkboxLollipop;
+
+
     ArrayAdapter<String> breadAdapter, meatAdapter, sizeAdapter, typeAdapter;
     List<String> breadList, meatList,sizeList, typeList;
+    private final int zeroValue=0;
 
 
     @Override
@@ -42,6 +77,26 @@ public class PopUpActivity extends AppCompatActivity {
         int height = dm.heightPixels;
         selectedFood = getIntent().getStringExtra(FoodifyTags.SELECT_FOOD_CALLER);
 
+
+        /*
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+        checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);*/
+
+
         //Il layout che viene caricato varia a seconda del tipo di cibo che si sceglie
         //Creare diversi layout per diversi cibi
         switch (selectedFood) {
@@ -50,13 +105,18 @@ public class PopUpActivity extends AppCompatActivity {
                 //hamburger = new Food(Resources.getSystem().getString(R.string.hamburger_label));
                 hamburger = new Food("hamburger");
 
+                checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
+                checkboxTomatoes=(CheckBox) findViewById(R.id.checkBoxTomatoes);
+                checkboxHamburgerOnions=(CheckBox) findViewById(R.id.checkBoxHamburgerOnions);
+                checkboxCucumber=(CheckBox) findViewById(R.id.checkBoxCucumber);
+
                 hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_BUCKWHEAT_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_BUCKWHEAT_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
                 hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_SESAME_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_SESAME_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
                 hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_WHOLE_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_WHOLE_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
 
                 mBreadSpinner = (Spinner) findViewById(R.id.bread_type_spinner);
                 breadList = new ArrayList<String>();
-                List<Food.IngredientSelected> hamburgerList= hamburger.getIngredients();
+                final List<Food.IngredientSelected> hamburgerList= hamburger.getIngredients();
                 for(int i =0; i<hamburgerList.size(); i++){
                     if(hamburgerList.get(i).getIngredientName().getCategory().equals(FoodifyConstants.BREAD_CATEGORY)) {
                         breadList.add(hamburgerList.get(i).getIngredientName().getName());
@@ -82,16 +142,52 @@ public class PopUpActivity extends AppCompatActivity {
                 meatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mMeatSpinner.setAdapter(meatAdapter);
 
+                hamburger.addIngredient(FoodifyConstants.SALAD,FoodifyConstants.SALAD_PRICE,FoodifyConstants.ADDITION_CATEGORY);
+                hamburger.addIngredient(FoodifyConstants.TOMATOES,FoodifyConstants.TOMATOES_PRICE,FoodifyConstants.ADDITION_CATEGORY);
+                hamburger.addIngredient(FoodifyConstants.ONIONS,FoodifyConstants.ONIONS_PRICE,FoodifyConstants.ADDITION_CATEGORY);
+                hamburger.addIngredient(FoodifyConstants.CUCUMBER,FoodifyConstants.CUCUMBER_PRICE,FoodifyConstants.ADDITION_CATEGORY);
+
+                confirmHamburger= (Button) findViewById(R.id.buttonConfirmHamburger);
+                confirmHamburger.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        hamburger.setIngredientSelected((String)mBreadSpinner.getItemAtPosition(zeroValue),true);
+                        hamburger.setIngredientSelected((String)mMeatSpinner.getItemAtPosition(zeroValue),true);
+                        hamburger.setIngredientSelected(FoodifyConstants.SALAD,checkboxSalad.isChecked());
+                        hamburger.setIngredientSelected(FoodifyConstants.TOMATOES,checkboxTomatoes.isChecked());
+                        hamburger.setIngredientSelected(FoodifyConstants.ONIONS,checkboxHamburgerOnions.isChecked());
+                        hamburger.setIngredientSelected(FoodifyConstants.CUCUMBER,checkboxCucumber.isChecked());
+
+                        hamburger.setTotalPrice();
+                        Log.d("Controllo", hamburger.toString());
+                    }
+                });
+
                 getWindow().setLayout((int) (width * .8), (int) (height * .6));
                 break;
 
             case FoodifyTags.HOT_DOG:
                 setContentView(R.layout.activity_pop_up_hot_dog);
+
+                confirmHotdog= (Button) findViewById(R.id.buttonConfirmHotdog);
+                confirmHotdog.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                    }
+                });
+
                 getWindow().setLayout((int) (width * .7), (int) (height * .5));
                 break;
 
             case FoodifyTags.FRIES:
                 setContentView(R.layout.activity_pop_up_fries);
+
+                confirmFries= (Button) findViewById(R.id.buttonConfirmFries);
+                confirmFries.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                    }
+                });
+
                 getWindow().setLayout((int) (width * .6), (int) (height * .4));
                 break;
 
@@ -129,13 +225,30 @@ public class PopUpActivity extends AppCompatActivity {
                 typeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,typeList);
                 typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mTypeSpinner.setAdapter(typeAdapter);
+
+                confirmDrink= (Button) findViewById(R.id.buttonConfirmDrink);
+                confirmDrink.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                    }
+                });
+
                 getWindow().setLayout((int) (width * .6), (int) (height * .4));
                 break;
 
             case FoodifyTags.DESSERT:
                 setContentView(R.layout.activity_pop_up_dessert);
+
+                confirmDessert= (Button) findViewById(R.id.buttonConfirmDessert);
+                confirmDessert.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                    }
+                });
+
                 getWindow().setLayout((int) (width * .6), (int) (height * .8));
                 break;
         }
+
     }
 }

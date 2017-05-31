@@ -13,7 +13,7 @@
         android:gravity="center">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewDessert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -23,7 +23,7 @@
 
 
     <CheckBox
-        android:id="@+id/textView3"
+        android:id="@+id/checkboxIceCream"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -32,7 +32,7 @@
         android:padding="10dp"/>
 
     <CheckBox
-        android:id="@+id/textView3"
+        android:id="@+id/checkboxJallyBean"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -41,7 +41,7 @@
         android:padding="10dp"/>
 
     <CheckBox
-        android:id="@+id/textView3"
+        android:id="@+id/checkboxKitKat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -50,7 +50,7 @@
         android:padding="10dp"/>
 
     <CheckBox
-        android:id="@+id/textView3"
+        android:id="@+id/checkboxLollipop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -59,7 +59,7 @@
         android:padding="10dp"/>
 
     <CheckBox
-        android:id="@+id/textView3"
+        android:id="@+id/checkboxMarshmellow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -68,7 +68,7 @@
         android:padding="10dp"/>
 
     <CheckBox
-        android:id="@+id/textView3"
+        android:id="@+id/checkboxNougat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -94,7 +94,7 @@
             android:layout_gravity="center"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonConfirmDessert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
