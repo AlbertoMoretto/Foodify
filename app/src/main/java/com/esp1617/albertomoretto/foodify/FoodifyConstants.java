@@ -9,6 +9,12 @@ public class FoodifyConstants {
     public static final float DEFAULT_ACCOUNT_VALUE = 0.0f;
     public static final float DEFAULT_MEDIUM_PRICE = 10.0f;
 
+    public static final String BASIC_HOTDOG_INGREDIENTS="Basic Hotdog Ingredients";
+    public static final float BASIC_HOTDOG_INGREDIENTS_PRICE = 4;
+
+    public static final String BASIC_FRIES_INGREDIENTS="Basic Fries Ingredients";
+    public static final float BASIC_FRIES_INGREDIENTS_PRICE = 3;
+
 
     //ingredients and foods names
     public static final String MEAT_HABURGER_CLASSIC_NAME ="Classic Hamburger";
@@ -73,13 +79,13 @@ public class FoodifyConstants {
     public static final float TOMATOES_PRICE = 0.5f;
     public static final float ONIONS_PRICE = 0.5f;
     public static final float CUCUMBER_PRICE = 0.5f;
-    public static final float BREADCRUMS_PRICE = 1;
+    public static final float BREADCRUMBS_PRICE = 1;
     public static final float MUSTARD_PRICE = 1;
     public static final float MAYONNAISE_PRICE = 1;
     public static final float KETCHUP_PRICE = 1;
     public static final float BARBECUE_SAUCE_PRICE = 1;
     public static final float ICE_CREAM_SANDWICH_PRICE = 3;
-    public static final float JALLY_BEAN_PRICE = 2.5f;
+    public static final float JELLY_BEAN_PRICE = 2.5f;
     public static final float KIT_KAT_PRICE = 2f;
     public static final float LOLLIPOP_PRICE = 1.5f;
     public static final float MARSHMELLOW_PRICE = 3f;
