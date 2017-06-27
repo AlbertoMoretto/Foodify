@@ -98,6 +98,13 @@ public class FoodifyConstants {
 
 
 
+    public static final int PADDING_LEFT_RIGHT = 100;
+    public static final int PADDING_TOP_DOWN = 180;
+    public static final int TEXT_SIZE_ORDER_MESSAGE = 35;
+
+
+
+
 
 
 

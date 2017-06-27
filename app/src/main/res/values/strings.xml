@@ -35,6 +35,9 @@
     <string name="jelly_bean_label">Jelly Bean</string>
     <string name="ice_cream_sandwich_label">Ice Cream Sandwich</string>
 
+
+    <string name="order_processing">Your order is being processed, it will be ready when the timer expires.\nYou can close the app.</string>
+    <string name="order_deleted">Your order has been deleted.</string>
     <!-- Notification strings -->
     <string name="simple_notification_title_template">Dove sei finito?!</string>
     <string name="simple_notification_placeholder_text_template">

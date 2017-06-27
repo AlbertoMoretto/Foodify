@@ -84,7 +84,7 @@ public class Food {
      */
     public String toString() {
         String ingredientList="";
-        ingredientList += name+":\n";
+        ingredientList += name.toUpperCase()+":\n";
         for(int i = 0; i<ingredients.size(); i++) {
             if(ingredients.get(i).getSelected()) {
                 ingredientList += (ingredients.get(i).getIngredientName().getName());

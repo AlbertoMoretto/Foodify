@@ -161,6 +161,7 @@ public class FoodActivity extends AppCompatActivity {
         showOrder.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,orderPrice);
         showOrder.putExtra(FoodifyTags.EXTRA_ITEMS_ORDER,orderItems);
         startActivity(showOrder);
+        finish();
     }
     // THIS MUST BE CHANGED, openAccount is declared in the same way in MainActivity and it does the same thing
     public void openAccount(){
