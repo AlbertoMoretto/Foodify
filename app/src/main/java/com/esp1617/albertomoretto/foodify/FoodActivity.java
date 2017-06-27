@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,6 +19,8 @@ public class FoodActivity extends AppCompatActivity {
 
     private TextView mAccountTextView;
     private TextView mOrderTextView;
+
+    private Button mShowOrderButton;
 
     private LinearLayout mHamburgerLayout;
     private LinearLayout mHotDogLayout;
@@ -51,6 +54,8 @@ public class FoodActivity extends AppCompatActivity {
         mDessertLayout = (LinearLayout) findViewById(R.id.dessert_linear_layout);
         mOrderLayout = (LinearLayout) findViewById(R.id.order_linear_layout);
         mAccountLayout = (LinearLayout) findViewById(R.id.account_linear_layout);
+
+        mShowOrderButton = (Button) findViewById(R.id.show_order);
 
         mAccountTextView.setText(""+savedAccountValue+"$");
 
@@ -104,6 +109,14 @@ public class FoodActivity extends AppCompatActivity {
                 openAccount();
             }
         });
+
+        mShowOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //launch PopUpActivity with data from the launcher
+                showOrder(orderValue,orderComponents);
+            }
+        });
     }
 
     @Override
@@ -141,6 +154,13 @@ public class FoodActivity extends AppCompatActivity {
         intent.putExtra(FoodifyTags.SELECT_FOOD_CALLER, componentCaller);
         startActivityForResult(intent, FoodifyTags.POPUP_CONFIRM_REQUEST);
 
+    }
+
+    private void showOrder(float orderPrice, String orderItems) {
+        Intent showOrder = new Intent(this, YourOrderActivity.class);
+        showOrder.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,orderPrice);
+        showOrder.putExtra(FoodifyTags.EXTRA_ITEMS_ORDER,orderItems);
+        startActivity(showOrder);
     }
     // THIS MUST BE CHANGED, openAccount is declared in the same way in MainActivity and it does the same thing
     public void openAccount(){

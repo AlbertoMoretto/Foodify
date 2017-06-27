@@ -44,5 +44,8 @@
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>
 
+    <string name="show_order">Show order</string>
+    <string name="confirm_order">CONFIRM</string>
+    <string name="delete_order">DELETE</string>
 
 </resources>

@@ -17,6 +17,9 @@ public class FoodifyTags {
     public static String EXTRA_PRICE_SETTED = "com.esp1617.albertomoretto.price_setted";
     public static String EXTRA_ORDER_SETTED = "com.esp1617.albertomoretto.order_setted";
 
+    public static String EXTRA_PRICE_ORDER = "com.esp1617.albertomoretto.price_order";
+    public static String EXTRA_ITEMS_ORDER = "com.esp1617.albertomoretto.items_order";
+
     public static final int POPUP_CONFIRM_REQUEST = 1;
 
     //DEBUG TAGS

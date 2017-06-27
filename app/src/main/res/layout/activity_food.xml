@@ -175,6 +175,12 @@
             android:orientation="horizontal"
             android:gravity="right">
 
+            <Button
+                android:id="@+id/show_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_order"/>
+
             <TextView
                 android:id="@+id/account_label_text_view"
                 android:layout_width="wrap_content"
