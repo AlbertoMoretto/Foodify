@@ -1,6 +1,6 @@
 package com.esp1617.albertomoretto.foodify;
 
-import android.content.res.Resources;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +66,13 @@ public class PopUpActivity extends AppCompatActivity {
     ArrayAdapter<String> breadAdapter, meatAdapter, sizeAdapter, typeAdapter;
     List<String> breadList, meatList,sizeList, typeList;
     private final int zeroValue=0;
+
+    private void setOrder(float price, String order) {
+        Intent data = new Intent();
+        data.putExtra(FoodifyTags.EXTRA_PRICE_SETTED,price);
+        data.putExtra(FoodifyTags.EXTRA_ORDER_SETTED,order);
+        setResult(RESULT_OK,data);
+    }
 
 
     @Override
@@ -149,6 +155,8 @@ public class PopUpActivity extends AppCompatActivity {
 
                         hamburger.setTotalPrice();
                         Log.d("Controllo", hamburger.toString());
+                        setOrder(hamburger.getTotalPrice(),hamburger.toString());
+                        finish();
                     }
                 });
 
@@ -184,6 +192,8 @@ public class PopUpActivity extends AppCompatActivity {
 
                         hotDog.setTotalPrice();
                         Log.d("Controllo", hotDog.toString());
+                        setOrder(hotDog.getTotalPrice(),hotDog.toString());
+                        finish();
                     }
                 });
 
@@ -213,6 +223,8 @@ public class PopUpActivity extends AppCompatActivity {
 
                         fries.setTotalPrice();
                         Log.d("Controllo", fries.toString());
+                        setOrder(fries.getTotalPrice(),fries.toString());
+                        finish();
                     }
                 });
 
@@ -264,6 +276,8 @@ public class PopUpActivity extends AppCompatActivity {
 
                         drink.setTotalPrice();
                         Log.d("Controllo", drink.toString());
+                        setOrder(drink.getTotalPrice(),drink.toString());
+                        finish();
                     }
                 });
 
@@ -304,6 +318,8 @@ public class PopUpActivity extends AppCompatActivity {
 
                         dessert.setTotalPrice();
                         Log.d("Controllo", dessert.toString());
+                        setOrder(dessert.getTotalPrice(),dessert.toString());
+                        finish();
 
                     }
                 });

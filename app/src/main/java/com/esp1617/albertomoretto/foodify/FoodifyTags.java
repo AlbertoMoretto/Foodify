@@ -13,6 +13,12 @@ public class FoodifyTags {
     public static final String DRINK = "com.esp1617.albertomoretto.foodify_drink";
     public static final String DESSERT = "com.esp1617.albertomoretto.foodify_dessert";
 
+
+    public static String EXTRA_PRICE_SETTED = "com.esp1617.albertomoretto.price_setted";
+    public static String EXTRA_ORDER_SETTED = "com.esp1617.albertomoretto.order_setted";
+
+    public static final int POPUP_CONFIRM_REQUEST = 1;
+
     //DEBUG TAGS
     //CLASS NAMES
     public static final String FOOD_ACTIVITY_TAG ="FoodActivity";

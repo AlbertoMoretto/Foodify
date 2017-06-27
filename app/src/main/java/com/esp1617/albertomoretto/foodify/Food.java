@@ -84,15 +84,15 @@ public class Food {
      */
     public String toString() {
         String ingredientList="";
-        for(int i = 0; i<ingredients.size(); i++){
-            ingredientList+=(ingredients.get(i).getIngredientName().getName())+"--->"+(ingredients.get(i).getIngredientName().getPrice())+"--->"+(ingredients.get(i).getSelected());
-            ingredientList+="\n";
+        ingredientList += name+":\n";
+        for(int i = 0; i<ingredients.size(); i++) {
+            if(ingredients.get(i).getSelected()) {
+                ingredientList += (ingredients.get(i).getIngredientName().getName());
+                ingredientList += "\n";
+            }
         }
-        return "Food{" +
-                "name='" + name + '\'' +
-                ", " + ingredientList+
-                ", totalPrice=" + totalPrice +
-                '}';
+        ingredientList +="\n";
+        return ingredientList;
     }
 
     /**

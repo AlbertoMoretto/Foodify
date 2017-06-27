@@ -12,8 +12,12 @@ import android.widget.TextView;
 
 public class FoodActivity extends AppCompatActivity {
     private float savedAccountValue;
+    private float orderValue;
+
+    private String orderComponents;
 
     private TextView mAccountTextView;
+    private TextView mOrderTextView;
 
     private LinearLayout mHamburgerLayout;
     private LinearLayout mHotDogLayout;
@@ -31,10 +35,14 @@ public class FoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
+        orderValue = 0.0f;
+        orderComponents = "";
+
         SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE,Context.MODE_PRIVATE);
         savedAccountValue = sharedPref.getFloat(FoodifyTags.BILL_VALUE, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
 
         mAccountTextView = (TextView) findViewById(R.id.account_value_text_view);
+        mOrderTextView = (TextView) findViewById(R.id.order_value_text_view);
 
         mHamburgerLayout = (LinearLayout) findViewById(R.id.hamburger_linear_layout);
         mHotDogLayout = (LinearLayout) findViewById(R.id.hot_dog_linear_layout);
@@ -99,6 +107,25 @@ public class FoodActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == FoodifyTags.POPUP_CONFIRM_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                orderComponents += data.getStringExtra(FoodifyTags.EXTRA_ORDER_SETTED);
+                Log.d("Order",orderComponents);
+                orderValue += data.getFloatExtra(FoodifyTags.EXTRA_PRICE_SETTED,0.0f);
+                mOrderTextView.setText(""+orderValue+"$");
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+
+                // Do something with the contact here (bigger example below)
+            }
+        }
+
+    }
+
+    @Override
     public void onResume(){
         super.onResume();
         Log.d(FoodifyTags.FOOD_ACTIVITY_TAG, "onResume() called");
@@ -112,7 +139,7 @@ public class FoodActivity extends AppCompatActivity {
     private void popUpLauncher(String componentCaller){
         Intent intent = new Intent(this, PopUpActivity.class);
         intent.putExtra(FoodifyTags.SELECT_FOOD_CALLER, componentCaller);
-        startActivity(intent);
+        startActivityForResult(intent, FoodifyTags.POPUP_CONFIRM_REQUEST);
 
     }
     // THIS MUST BE CHANGED, openAccount is declared in the same way in MainActivity and it does the same thing
