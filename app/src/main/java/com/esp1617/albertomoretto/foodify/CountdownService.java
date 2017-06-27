@@ -30,7 +30,7 @@ public class CountdownService extends Service {
     //private static final String EXTRA_PARAM1 = "com.example.aleci.provanotifiche.extra.PARAM1";
     //private static final String EXTRA_PARAM2 = "com.example.aleci.provanotifiche.extra.PARAM2";
 
-    private long preparation_time=200000;
+    private long preparation_time=30000;
     private long minutes;
     private long seconds;
 
@@ -88,9 +88,11 @@ public class CountdownService extends Service {
 // Sets an ID for the notification, so it can be updated
         final int notifyID = 5786423;
         final android.support.v4.app.NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
-                .setContentTitle("New Message")
-                .setContentText("Inizio")
+                .setContentTitle(getResources().getString(R.string.notification_order_preparation_title))
+                .setContentText(getResources().getString(R.string.notification_order_preparation_text))
                 .setSmallIcon(R.drawable.ic_stat_simple);
+
+
         //numMessages = 0;
 
         minutes=preparation_time/60000;
@@ -113,8 +115,9 @@ public class CountdownService extends Service {
 
             public void onFinish() {
                 mNotifyBuilder.setContentText("done!");
-                mNotificationManager.notify(notifyID,
-                        mNotifyBuilder.build());
+                mNotificationManager.notify(notifyID, mNotifyBuilder.build());
+
+                //TODO : lanciare notifica pagamento
 
             }
         }.start();
