@@ -53,15 +53,6 @@
         android:padding="20dp"
         android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/custom_hamburger_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="50sp"
-            android:text="@string/starting_bill_dollars"
-            android:layout_gravity="center"/>
-
         <Button
             android:id="@+id/buttonConfirmFries"
             android:layout_width="wrap_content"

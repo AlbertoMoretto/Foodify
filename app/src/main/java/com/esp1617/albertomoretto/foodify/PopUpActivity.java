@@ -146,8 +146,8 @@ public class PopUpActivity extends AppCompatActivity {
                 confirmHamburger= (Button) findViewById(R.id.buttonConfirmHamburger);
                 confirmHamburger.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        hamburger.setIngredientSelected((String)mBreadSpinner.getItemAtPosition(zeroValue),true);
-                        hamburger.setIngredientSelected((String)mMeatSpinner.getItemAtPosition(zeroValue),true);
+                        hamburger.setIngredientSelected((String)mBreadSpinner.getSelectedItem(),true);
+                        hamburger.setIngredientSelected((String)mMeatSpinner.getSelectedItem(),true);
                         hamburger.setIngredientSelected(FoodifyConstants.SALAD,checkboxSalad.isChecked());
                         hamburger.setIngredientSelected(FoodifyConstants.TOMATOES,checkboxTomatoes.isChecked());
                         hamburger.setIngredientSelected(FoodifyConstants.ONIONS,checkboxHamburgerOnions.isChecked());
@@ -271,8 +271,8 @@ public class PopUpActivity extends AppCompatActivity {
                 confirmDrink= (Button) findViewById(R.id.buttonConfirmDrink);
                 confirmDrink.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        drink.setIngredientSelected((String)mSizeSpinner.getItemAtPosition(zeroValue),true);
-                        drink.setIngredientSelected((String)mTypeSpinner.getItemAtPosition(zeroValue),true);
+                        drink.setIngredientSelected((String)mSizeSpinner.getSelectedItem(),true);
+                        drink.setIngredientSelected((String)mTypeSpinner.getSelectedItem(),true);
 
                         drink.setTotalPrice();
                         Log.d("Controllo", drink.toString());
