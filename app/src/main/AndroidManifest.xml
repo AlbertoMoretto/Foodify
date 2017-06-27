@@ -25,6 +25,9 @@
             android:theme="@style/AppTheme.PopUp"/>
         <activity android:name=".YourOrderActivity">
         </activity>
+        <service
+            android:name = ".CountdownService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

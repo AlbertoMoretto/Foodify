@@ -2,6 +2,7 @@ package com.esp1617.albertomoretto.foodify;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -39,13 +40,22 @@ public class YourOrderActivity extends AppCompatActivity {
         mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOrderTitle.setVisibility(View.GONE);
+                /*mOrderTitle.setVisibility(View.GONE);
                 mConfirmButton.setVisibility(View.GONE);
                 mDeleteButton.setVisibility(View.GONE);
                 mOrderItemsTextView.setPadding(FoodifyConstants.PADDING_LEFT_RIGHT,FoodifyConstants.PADDING_TOP_DOWN,FoodifyConstants.PADDING_LEFT_RIGHT,FoodifyConstants.PADDING_TOP_DOWN);
                 mOrderItemsTextView.setTextSize(FoodifyConstants.TEXT_SIZE_ORDER_MESSAGE);
                 mOrderItemsTextView.setTextColor(Color.GREEN);
-                mOrderItemsTextView.setText(R.string.order_processing);
+                mOrderItemsTextView.setText(R.string.order_processing);*/
+
+                Intent timerNotification = new Intent(getApplicationContext(),CountdownService.class);
+                timerNotification.putExtra(CountdownService.ACTION_START,true);
+                startService(timerNotification);
+
+                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("EXIT",true);
+                startActivity(i);
             }
         });
 
