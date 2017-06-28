@@ -30,7 +30,10 @@ public class CountdownService extends Service {
     //private static final String EXTRA_PARAM1 = "com.example.aleci.provanotifiche.extra.PARAM1";
     //private static final String EXTRA_PARAM2 = "com.example.aleci.provanotifiche.extra.PARAM2";
 
-    private long preparation_time=30000;
+    public static final long DEFAULT_PREPARATION_TIME=3000;
+
+    private int orderDim;
+    private long preparation_time;
     private long minutes;
     private long seconds;
 
@@ -53,7 +56,11 @@ public class CountdownService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId)
     {
 
-        if(intent.getBooleanExtra(ACTION_START, false)) handleActionStartTimer(preparation_time);
+        if(intent.getBooleanExtra(ACTION_START, false)) {
+            orderDim = intent.getIntExtra(FoodifyTags.EXTRA_SIZE_ORDER,0);
+            preparation_time = orderDim*DEFAULT_PREPARATION_TIME;
+            handleActionStartTimer(preparation_time);
+        }
         return Service.START_REDELIVER_INTENT;
     }
 
