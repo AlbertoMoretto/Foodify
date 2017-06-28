@@ -16,6 +16,7 @@ public class FoodActivity extends AppCompatActivity {
     private float orderValue;
 
     private String orderComponents;
+    private int orderSize;
 
     private TextView mAccountTextView;
     private TextView mOrderTextView;
@@ -40,6 +41,7 @@ public class FoodActivity extends AppCompatActivity {
 
         orderValue = 0.0f;
         orderComponents = "";
+        orderSize = 0;
 
         SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE,Context.MODE_PRIVATE);
         savedAccountValue = sharedPref.getFloat(FoodifyTags.BILL_VALUE, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
@@ -114,7 +116,7 @@ public class FoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //launch PopUpActivity with data from the launcher
-                showOrder(orderValue,orderComponents);
+                showOrder(orderValue,orderComponents,orderSize);
             }
         });
     }
@@ -125,6 +127,7 @@ public class FoodActivity extends AppCompatActivity {
         if (requestCode == FoodifyTags.POPUP_CONFIRM_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
+                orderSize++;
                 orderComponents += data.getStringExtra(FoodifyTags.EXTRA_ORDER_SETTED);
                 Log.d("Order",orderComponents);
                 orderValue += data.getFloatExtra(FoodifyTags.EXTRA_PRICE_SETTED,0.0f);
@@ -156,10 +159,11 @@ public class FoodActivity extends AppCompatActivity {
 
     }
 
-    private void showOrder(float orderPrice, String orderItems) {
+    private void showOrder(float orderPrice, String orderItems, int totalOrder) {
         Intent showOrder = new Intent(this, YourOrderActivity.class);
         showOrder.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,orderPrice);
         showOrder.putExtra(FoodifyTags.EXTRA_ITEMS_ORDER,orderItems);
+        showOrder.putExtra(FoodifyTags.EXTRA_SIZE_ORDER,totalOrder);
         startActivity(showOrder);
         finish();
     }

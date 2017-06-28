@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class YourOrderActivity extends AppCompatActivity {
 
     private float totalPrice;
+    private int totalOrderSize;
     private String selectedItems;
     private TextView mOrderItemsTextView;
     private TextView mOrderTitle;
@@ -32,6 +33,7 @@ public class YourOrderActivity extends AppCompatActivity {
 
         totalPrice = getIntent().getFloatExtra(FoodifyTags.EXTRA_PRICE_ORDER,0.0f);
         selectedItems = getIntent().getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
+        totalOrderSize = getIntent().getIntExtra(FoodifyTags.EXTRA_SIZE_ORDER,0);
 
         mOrderItemsTextView.setText(selectedItems);
 
