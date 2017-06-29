@@ -5,6 +5,9 @@ package com.esp1617.albertomoretto.foodify;
  */
 
 public class FoodifyTags {
+    public static final String ORDER_NOTIFICATION = "com.esp1617.albertomoretto.foodify_notification_order";
+
+
     public static final String BILL_VALUE = "com.esp1617.albertomoretto.foodify_bill_value";
     public static final String SELECT_FOOD_CALLER = "com.esp1617.albertomoretto.foodify_select_food_caller";
     public static final String HAMBURGER = "com.esp1617.albertomoretto.foodify_hamburger";
@@ -20,6 +23,8 @@ public class FoodifyTags {
     public static String EXTRA_PRICE_ORDER = "com.esp1617.albertomoretto.price_order";
     public static String EXTRA_ITEMS_ORDER = "com.esp1617.albertomoretto.items_order";
     public static String EXTRA_SIZE_ORDER = "com.esp1617.albertomoretto.size_order";
+
+    public static String EXTRA_NOTIFY_ID_ORDER = "com.esp1617.albertomoretto.notify_id_order";
 
     public static final int POPUP_CONFIRM_REQUEST = 1;
 

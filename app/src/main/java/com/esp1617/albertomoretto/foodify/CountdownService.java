@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -36,6 +37,7 @@ public class CountdownService extends Service {
     private long preparation_time;
     private long minutes;
     private long seconds;
+    private int notifyID;
 
     public CountdownService() {
         System.out.println("SERVICE AVVIATO!");
@@ -57,6 +59,7 @@ public class CountdownService extends Service {
     {
 
         if(intent.getBooleanExtra(ACTION_START, false)) {
+            notifyID = intent.getIntExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,0);
             orderDim = intent.getIntExtra(FoodifyTags.EXTRA_SIZE_ORDER,0);
             preparation_time = orderDim*DEFAULT_PREPARATION_TIME;
             handleActionStartTimer(preparation_time);
@@ -93,11 +96,11 @@ public class CountdownService extends Service {
    */
         final NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 // Sets an ID for the notification, so it can be updated
-        final int notifyID = 5786423;
+        //final int notifyID = 5786423;
         final android.support.v4.app.NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
-                .setContentTitle(getResources().getString(R.string.notification_order_preparation_title))
+                .setContentTitle(getResources().getString(R.string.notification_order)+" "+notifyID+" "+getResources().getString(R.string.notification_order_preparation_title))
                 .setContentText(getResources().getString(R.string.notification_order_preparation_text))
-                .setSmallIcon(R.drawable.ic_stat_simple);
+                .setSmallIcon(R.drawable.food_icon_button);
 
 
         //numMessages = 0;
@@ -107,22 +110,27 @@ public class CountdownService extends Service {
 
         new CountDownTimer(preparation_time, 1000) {
 
+            /*SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
+            int notifyID = sharedPrefNotify.getInt(FoodifyTags.ORDER_NOTIFICATION, FoodifyConstants.DEFAULT_ORDER_ID);*/
+            int currentNotifyID = notifyID;
             public void onTick(long millisUntilFinished) {
                 if (millisUntilFinished/60000>1){
                     mNotifyBuilder.setContentText(""+millisUntilFinished/60000+":"+(millisUntilFinished%60000)/1000);
                 }else{
-                    mNotifyBuilder.setContentText("00:"+(millisUntilFinished%60000)/1000);
+                    mNotifyBuilder.setContentText("00:"+(millisUntilFinished%60000)/1000)
+                                  .setOngoing(true);
 
                 }
 
-                mNotificationManager.notify(notifyID,
+                mNotificationManager.notify(currentNotifyID,
                         mNotifyBuilder.build());
 
             }
 
             public void onFinish() {
-                mNotifyBuilder.setContentText("done!");
-                mNotificationManager.notify(notifyID, mNotifyBuilder.build());
+                mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
+                              .setContentText("Done!");
+                mNotificationManager.notify(currentNotifyID, mNotifyBuilder.build());
 
                 //TODO : lanciare notifica pagamento
 

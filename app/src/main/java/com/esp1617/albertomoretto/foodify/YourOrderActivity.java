@@ -1,11 +1,14 @@
 package com.esp1617.albertomoretto.foodify;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,11 +22,13 @@ public class YourOrderActivity extends AppCompatActivity {
     private TextView mOrderTitle;
     private Button mConfirmButton;
     private Button mDeleteButton;
+    private int notifyID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_order);
+
 
 
         mOrderItemsTextView = (TextView) findViewById(R.id.bill);
@@ -34,6 +39,11 @@ public class YourOrderActivity extends AppCompatActivity {
         totalPrice = getIntent().getFloatExtra(FoodifyTags.EXTRA_PRICE_ORDER,0.0f);
         selectedItems = getIntent().getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
         totalOrderSize = getIntent().getIntExtra(FoodifyTags.EXTRA_SIZE_ORDER,0);
+
+        SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
+        Log.d("sharedpref", "good");
+        notifyID = sharedPrefNotify.getInt(FoodifyTags.ORDER_NOTIFICATION, FoodifyConstants.DEFAULT_ORDER_ID);
+
 
         mOrderItemsTextView.setText(selectedItems);
 
@@ -52,12 +62,14 @@ public class YourOrderActivity extends AppCompatActivity {
 
                 Intent timerNotification = new Intent(getApplicationContext(),CountdownService.class);
                 timerNotification.putExtra(FoodifyTags.EXTRA_SIZE_ORDER,totalOrderSize);
+                timerNotification.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,notifyID);
                 timerNotification.putExtra(CountdownService.ACTION_START,true);
                 startService(timerNotification);
 
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.putExtra("EXIT",true);
+                updateNotifyID();
                 startActivity(i);
             }
         });
@@ -82,5 +94,28 @@ public class YourOrderActivity extends AppCompatActivity {
             Intent i = new Intent(this, FoodActivity.class);
             startActivity(i);
             finish();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(FoodifyTags.ORDER_NOTIFICATION, notifyID);
+        editor.commit();
+
+
+    }
+
+    private void updateNotifyID()
+    {
+        if(notifyID<FoodifyConstants.MAX_NOTIFY_ID) notifyID++;
+        else notifyID = 0;
+        SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPrefNotify.edit();
+        editor.putInt(FoodifyTags.ORDER_NOTIFICATION, notifyID);
+        editor.commit();
     }
 }

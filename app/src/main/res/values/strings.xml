@@ -43,8 +43,12 @@
     <string name="simple_notification_placeholder_text_template">
         Il cibo non va sprecato! …e poi ci devi dei soldi.
     </string>
-    <string name="notification_order_preparation_title">Preparazione ordine in corso</string>
-    <string name="notification_order_preparation_text">La tua ordinazione è in elaborazione</string>
+
+
+    <string name="notification_order">Order </string>
+    <string name="notification_order_preparation_title"> is in elaboration</string>
+    <string name="notification_order_preparation_text">Your order is in elaboration</string>
+    <string name="notification_order_ready">Your order is ready!</string>
 
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>

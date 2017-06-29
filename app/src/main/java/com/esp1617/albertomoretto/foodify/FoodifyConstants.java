@@ -102,7 +102,8 @@ public class FoodifyConstants {
     public static final int PADDING_TOP_DOWN = 180;
     public static final int TEXT_SIZE_ORDER_MESSAGE = 35;
 
-
+    public static final int  MAX_NOTIFY_ID = 50000;
+    public static final int DEFAULT_ORDER_ID = 1;
 
 
 
