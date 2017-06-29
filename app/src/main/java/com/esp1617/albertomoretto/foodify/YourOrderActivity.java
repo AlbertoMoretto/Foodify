@@ -63,6 +63,7 @@ public class YourOrderActivity extends AppCompatActivity {
                 Intent timerNotification = new Intent(getApplicationContext(),CountdownService.class);
                 timerNotification.putExtra(FoodifyTags.EXTRA_SIZE_ORDER,totalOrderSize);
                 timerNotification.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,notifyID);
+                timerNotification.putExtra(FoodifyTags.EXTRA_ITEMS_ORDER,selectedItems);
                 timerNotification.putExtra(CountdownService.ACTION_START,true);
                 startService(timerNotification);
 

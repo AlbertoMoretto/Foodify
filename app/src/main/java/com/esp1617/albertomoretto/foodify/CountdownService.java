@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.provider.Settings;
@@ -38,6 +39,7 @@ public class CountdownService extends Service {
     private long minutes;
     private long seconds;
     private int notifyID;
+    private String selectedItems;
 
     public CountdownService() {
         System.out.println("SERVICE AVVIATO!");
@@ -61,6 +63,7 @@ public class CountdownService extends Service {
         if(intent.getBooleanExtra(ACTION_START, false)) {
             notifyID = intent.getIntExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,0);
             orderDim = intent.getIntExtra(FoodifyTags.EXTRA_SIZE_ORDER,0);
+            selectedItems = intent.getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
             preparation_time = orderDim*DEFAULT_PREPARATION_TIME;
             handleActionStartTimer(preparation_time);
         }
@@ -100,6 +103,7 @@ public class CountdownService extends Service {
         final android.support.v4.app.NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(getResources().getString(R.string.notification_order)+" "+notifyID+" "+getResources().getString(R.string.notification_order_preparation_title))
                 .setContentText(getResources().getString(R.string.notification_order_preparation_text))
+                .setColor(Color.RED)
                 .setSmallIcon(R.drawable.food_icon_button);
 
 
@@ -113,6 +117,7 @@ public class CountdownService extends Service {
             /*SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
             int notifyID = sharedPrefNotify.getInt(FoodifyTags.ORDER_NOTIFICATION, FoodifyConstants.DEFAULT_ORDER_ID);*/
             int currentNotifyID = notifyID;
+            String currentBill = selectedItems;
             public void onTick(long millisUntilFinished) {
                 if (millisUntilFinished/60000>1){
                     mNotifyBuilder.setContentText(""+millisUntilFinished/60000+":"+(millisUntilFinished%60000)/1000);
@@ -129,7 +134,13 @@ public class CountdownService extends Service {
 
             public void onFinish() {
                 mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
-                              .setContentText("Done!");
+                              .setContentText(getResources().getString(R.string.notification_order_done))
+                              .setOngoing(false);
+
+                NotificationCompat.BigTextStyle bill = new NotificationCompat.BigTextStyle();
+                bill.setBigContentTitle(getResources().getString(R.string.notification_order_ready));
+                bill.bigText(currentBill);
+                mNotifyBuilder.setStyle(bill);
                 mNotificationManager.notify(currentNotifyID, mNotifyBuilder.build());
 
                 //TODO : lanciare notifica pagamento
