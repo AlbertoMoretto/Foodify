@@ -3,8 +3,12 @@
     <string name="foodify_credits">Embedded Systems Programming<b>\nALAsoft\n\n</b><b>Cigagna Alessio,\nLerose Leonardo,\nMoretto Alberto.\n</b>\n<i>All rights reserved © 2017.</i></string>
     <string name="starting_bill_dollars">0,00$</string>
     <string name="starting_bill_euros">0,00€</string>
+    <string name="payment_success_label">Payment done successfully!</string>
+    <string name="payment_failed_label">You don"'"t have enough money, tap on your account to add money</string>
     <string name="add_money">add money to your account!</string>
     <string name="bill_label">Your Order:</string>
+    <string name="bill_total_order_label">Total Order:</string>
+    <string name="bill_pay_label">PAY</string>
     <string name="account_label">Your Account:</string>
     <string name="hamburger_label">Hamburger</string>
     <string name="hot_dog_label">Hot Dog</string>
@@ -50,6 +54,7 @@
     <string name="notification_order_preparation_text">Your order is in elaboration</string>
     <string name="notification_order_done">Done!</string>
     <string name="notification_order_ready">Your order is ready:</string>
+
 
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>

@@ -1,6 +1,7 @@
 package com.esp1617.albertomoretto.foodify;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,21 @@ public class AccountActivity extends AppCompatActivity {
                 savedBillValue = currentBillValue;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        Intent intent = new Intent();
+
+        SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putFloat(FoodifyTags.BILL_VALUE, savedBillValue);
+        editor.commit();
+        setResult(RESULT_OK,intent);
+        finish();
     }
 
     @Override

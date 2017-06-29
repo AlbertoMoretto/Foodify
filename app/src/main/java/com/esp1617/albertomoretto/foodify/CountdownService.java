@@ -3,6 +3,7 @@ package com.esp1617.albertomoretto.foodify;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
@@ -39,6 +40,7 @@ public class CountdownService extends Service {
     private long minutes;
     private long seconds;
     private int notifyID;
+    private float totalP;
     private String selectedItems;
 
     public CountdownService() {
@@ -64,6 +66,7 @@ public class CountdownService extends Service {
             notifyID = intent.getIntExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,0);
             orderDim = intent.getIntExtra(FoodifyTags.EXTRA_SIZE_ORDER,0);
             selectedItems = intent.getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
+            totalP = intent.getFloatExtra(FoodifyTags.EXTRA_PRICE_ORDER,0.0f);
             preparation_time = orderDim*DEFAULT_PREPARATION_TIME;
             handleActionStartTimer(preparation_time);
         }
@@ -118,6 +121,7 @@ public class CountdownService extends Service {
             int notifyID = sharedPrefNotify.getInt(FoodifyTags.ORDER_NOTIFICATION, FoodifyConstants.DEFAULT_ORDER_ID);*/
             int currentNotifyID = notifyID;
             String currentBill = selectedItems;
+            float currentTotal = totalP;
             public void onTick(long millisUntilFinished) {
                 if (millisUntilFinished/60000>1){
                     mNotifyBuilder.setContentText(""+millisUntilFinished/60000+":"+(millisUntilFinished%60000)/1000);
@@ -133,6 +137,12 @@ public class CountdownService extends Service {
             }
 
             public void onFinish() {
+                Intent i = new Intent(getApplicationContext(), CheckOutActivity.class);
+                i.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,currentNotifyID);
+                i.putExtra(FoodifyTags.EXTRA_ITEMS_ORDER,currentBill);
+                i.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,currentTotal);
+                PendingIntent pendI = PendingIntent.getActivity(getApplicationContext(),0,i,PendingIntent.FLAG_UPDATE_CURRENT);
+
                 mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
                               .setContentText(getResources().getString(R.string.notification_order_done))
                               .setOngoing(false);
@@ -140,8 +150,10 @@ public class CountdownService extends Service {
                 NotificationCompat.BigTextStyle bill = new NotificationCompat.BigTextStyle();
                 bill.setBigContentTitle(getResources().getString(R.string.notification_order_ready));
                 bill.bigText(currentBill);
-                mNotifyBuilder.setStyle(bill);
+                mNotifyBuilder.setStyle(bill)
+                              .setContentIntent(pendI);
                 mNotificationManager.notify(currentNotifyID, mNotifyBuilder.build());
+
 
                 //TODO : lanciare notifica pagamento
 

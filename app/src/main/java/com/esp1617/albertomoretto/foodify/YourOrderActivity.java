@@ -64,6 +64,7 @@ public class YourOrderActivity extends AppCompatActivity {
                 timerNotification.putExtra(FoodifyTags.EXTRA_SIZE_ORDER,totalOrderSize);
                 timerNotification.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,notifyID);
                 timerNotification.putExtra(FoodifyTags.EXTRA_ITEMS_ORDER,selectedItems);
+                timerNotification.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,totalPrice);
                 timerNotification.putExtra(CountdownService.ACTION_START,true);
                 startService(timerNotification);
 
