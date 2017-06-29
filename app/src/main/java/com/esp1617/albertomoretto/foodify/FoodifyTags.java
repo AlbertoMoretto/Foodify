@@ -26,6 +26,8 @@ public class FoodifyTags {
 
     public static String EXTRA_NOTIFY_ID_ORDER = "com.esp1617.albertomoretto.notify_id_order";
 
+    public static final String KEY_ORDER_PAY = "key_order_pay";
+
     public static final int POPUP_CONFIRM_REQUEST = 1;
     public static final int ACCOUNT_CHARGING = 1;
 

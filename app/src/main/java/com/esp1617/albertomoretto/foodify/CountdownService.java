@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.RemoteInput;
 import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
@@ -143,9 +144,24 @@ public class CountdownService extends Service {
                 i.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,currentTotal);
                 PendingIntent pendI = PendingIntent.getActivity(getApplicationContext(),0,i,PendingIntent.FLAG_UPDATE_CURRENT);
 
+                String replyLabel = getResources().getString(R.string.bill_pay_label);
+                RemoteInput remoteInput = new RemoteInput.Builder(FoodifyTags.KEY_ORDER_PAY)
+                        .setLabel(replyLabel)
+                        .build();
+
+                // Create the reply action and add the remote input.
+                /*Notification.Action action =
+                        new Notification.Action.Builder(R.drawable.order_icon_button,
+                                getString(R.string.bill_pay_label), pendI)
+                                .addRemoteInput(remoteInput)
+                                .build();*/
+                NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.order_icon_button, getString(R.string.bill_pay_label), pendI).build();
+
+
                 mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
                               .setContentText(getResources().getString(R.string.notification_order_done))
-                              .setOngoing(false);
+                              .setOngoing(false)
+                              .addAction(action);
 
                 NotificationCompat.BigTextStyle bill = new NotificationCompat.BigTextStyle();
                 bill.setBigContentTitle(getResources().getString(R.string.notification_order_ready));
