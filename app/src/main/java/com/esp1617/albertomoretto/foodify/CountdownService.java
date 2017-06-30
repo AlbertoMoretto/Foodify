@@ -10,11 +10,13 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -45,7 +47,7 @@ public class CountdownService extends Service {
     private String selectedItems;
 
     public CountdownService() {
-        System.out.println("SERVICE AVVIATO!");
+        Log.d("OK","SERVICE AVVIATO!");
     }
 
     @Nullable
@@ -71,7 +73,8 @@ public class CountdownService extends Service {
             preparation_time = orderDim*DEFAULT_PREPARATION_TIME;
             handleActionStartTimer(preparation_time);
         }
-        return Service.START_REDELIVER_INTENT;
+        //return Service.START_REDELIVER_INTENT;
+        return Service.START_STICKY;
     }
 
 
@@ -107,8 +110,8 @@ public class CountdownService extends Service {
         final android.support.v4.app.NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(getResources().getString(R.string.notification_order)+" "+notifyID+" "+getResources().getString(R.string.notification_order_preparation_title))
                 .setContentText(getResources().getString(R.string.notification_order_preparation_text))
-                .setColor(Color.RED)
-                .setSmallIcon(R.drawable.food_icon_button);
+                .setColor(Color.GREEN)
+                .setSmallIcon(R.drawable.foodify_notification);
 
 
         //numMessages = 0;
@@ -144,6 +147,14 @@ public class CountdownService extends Service {
                 i.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,currentTotal);
                 PendingIntent pendI = PendingIntent.getActivity(getApplicationContext(),0,i,PendingIntent.FLAG_UPDATE_CURRENT);
 
+                Intent intentPay = new Intent();
+                intentPay.setAction(FoodifyTags.CUSTOM_INTENT_PAYMENT);
+                /*Bundle payBundle = new Bundle();
+                payBundle.putFloat(FoodifyTags.EXTRA_PRICE_ORDER,currentTotal);*/
+                intentPay.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,currentTotal);
+                PendingIntent pendIntentPay = PendingIntent.getBroadcast(getApplicationContext(),FoodifyTags.BROADCAST_PAYMENT_REQUEST_CODE,intentPay,PendingIntent.FLAG_UPDATE_CURRENT);
+
+
                 String replyLabel = getResources().getString(R.string.bill_pay_label);
                 RemoteInput remoteInput = new RemoteInput.Builder(FoodifyTags.KEY_ORDER_PAY)
                         .setLabel(replyLabel)
@@ -155,7 +166,7 @@ public class CountdownService extends Service {
                                 getString(R.string.bill_pay_label), pendI)
                                 .addRemoteInput(remoteInput)
                                 .build();*/
-                NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.order_icon_button, getString(R.string.bill_pay_label), pendI).build();
+                NotificationCompat.Action action = new NotificationCompat.Action.Builder(R.drawable.order_icon_button, getString(R.string.bill_pay_label), pendIntentPay).build();
 
 
                 mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))

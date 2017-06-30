@@ -32,6 +32,15 @@
 
         <activity android:name=".CheckOutActivity">
         </activity>
+
+        <receiver
+            android:name=".PayReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.esp1617.albertomoretto.custom_intent_payment"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -16,6 +16,9 @@ public class FoodifyTags {
     public static final String DRINK = "com.esp1617.albertomoretto.foodify_drink";
     public static final String DESSERT = "com.esp1617.albertomoretto.foodify_dessert";
 
+    public static String CUSTOM_INTENT_PAYMENT = "com.esp1617.albertomoretto.custom_intent_payment";
+    public static int BROADCAST_PAYMENT_REQUEST_CODE = 12345;
+
 
     public static String EXTRA_PRICE_SETTED = "com.esp1617.albertomoretto.price_setted";
     public static String EXTRA_ORDER_SETTED = "com.esp1617.albertomoretto.order_setted";
