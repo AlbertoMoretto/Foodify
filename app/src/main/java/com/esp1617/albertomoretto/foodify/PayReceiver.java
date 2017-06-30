@@ -69,8 +69,8 @@ public class PayReceiver extends BroadcastReceiver {
             PendingIntent pendI = PendingIntent.getActivity(context,0,i,PendingIntent.FLAG_UPDATE_CURRENT);
 
             final Notification.Builder mNotifyBuilder = new Notification.Builder(context)
-                    .setContentTitle("Payment failed!")
-                    .setContentText("Your account value is too low.")
+                    .setContentTitle(context.getResources().getString(R.string.notification_payment_failed_title))
+                    .setContentText(context.getResources().getString(R.string.notification_payment_failed_text))
                     .setColor(Color.GREEN)
                     .setSmallIcon(R.drawable.foodify_notification)
                     .setContentIntent(pendI);

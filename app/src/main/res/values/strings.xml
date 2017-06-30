@@ -54,6 +54,8 @@
     <string name="notification_order_preparation_text">Your order is in elaboration</string>
     <string name="notification_order_done">Done!</string>
     <string name="notification_order_ready">Your order is ready:</string>
+    <string name="notification_payment_failed_title">Payment failed!</string>
+    <string name="notification_payment_failed_text">Your account value is too low.</string>
 
 
     <string name="action_share">Share</string>
