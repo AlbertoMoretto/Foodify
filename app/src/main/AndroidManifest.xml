@@ -41,6 +41,11 @@
                 <action android:name="com.esp1617.albertomoretto.custom_intent_payment"/>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".NotificationService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

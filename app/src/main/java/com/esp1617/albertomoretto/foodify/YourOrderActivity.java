@@ -60,12 +60,12 @@ public class YourOrderActivity extends AppCompatActivity {
                 mOrderItemsTextView.setTextColor(Color.GREEN);
                 mOrderItemsTextView.setText(R.string.order_processing);*/
 
-                Intent timerNotification = new Intent(getApplicationContext(),CountdownService.class);
+                Intent timerNotification = new Intent(getApplicationContext(),NotificationService.class);
                 timerNotification.putExtra(FoodifyTags.EXTRA_SIZE_ORDER,totalOrderSize);
                 timerNotification.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,notifyID);
                 timerNotification.putExtra(FoodifyTags.EXTRA_ITEMS_ORDER,selectedItems);
                 timerNotification.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,totalPrice);
-                timerNotification.putExtra(CountdownService.ACTION_START,true);
+                timerNotification.setAction(FoodifyTags.ACTION_START);
                 startService(timerNotification);
 
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
