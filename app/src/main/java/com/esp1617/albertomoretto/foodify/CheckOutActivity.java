@@ -64,6 +64,10 @@ public class CheckOutActivity extends AppCompatActivity {
             mNotificationManager.cancel(tempID);
         }
         readyID = FoodifyConstants.DEFAULT_ITEMS_READY;
+        SharedPreferences.Editor editorN = billToPay.edit();
+        editorN.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
+        editorN.commit();
+
 
 
         //bill = getIntent().getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
@@ -88,7 +92,7 @@ public class CheckOutActivity extends AppCompatActivity {
         mPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(savedBillValue>=total) {
+                if(savedBillValue>=billsTotal) {
                     savedBillValue = savedBillValue - billsTotal;
 
                     billsTotal = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
@@ -98,7 +102,6 @@ public class CheckOutActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor2 = billToPay.edit();
                     editor2.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
                     editor2.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
-                    editor2.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
                     editor2.commit();
 
                     SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);

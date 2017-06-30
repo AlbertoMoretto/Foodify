@@ -98,12 +98,6 @@ public class NotificationService extends IntentService {
         intentPay.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,totalPN);
         PendingIntent pendIntentPay = PendingIntent.getBroadcast(getApplicationContext(),FoodifyTags.BROADCAST_PAYMENT_REQUEST_CODE,intentPay,PendingIntent.FLAG_UPDATE_CURRENT);
 
-
-        String replyLabel = getResources().getString(R.string.bill_pay_label);
-        /*RemoteInput remoteInput = new RemoteInput.Builder(FoodifyTags.KEY_ORDER_PAY)
-                .setLabel(replyLabel)
-                .build();*/
-
         Notification.Action action = new Notification.Action.Builder(R.drawable.order_icon_button, getString(R.string.bill_pay_label), pendIntentPay).build();
 
 
