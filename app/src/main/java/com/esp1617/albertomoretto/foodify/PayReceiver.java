@@ -2,6 +2,7 @@ package com.esp1617.albertomoretto.foodify;
 
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -64,11 +65,16 @@ public class PayReceiver extends BroadcastReceiver {
             /*Toast paymentFailed = Toast.makeText(context,"You don't have enough money! \n Tap on notification body.",Toast.LENGTH_LONG);
             paymentFailed.show();*/
 
+            Intent i = new Intent(context, CheckOutActivity.class);
+            PendingIntent pendI = PendingIntent.getActivity(context,0,i,PendingIntent.FLAG_UPDATE_CURRENT);
+
             final Notification.Builder mNotifyBuilder = new Notification.Builder(context)
                     .setContentTitle("Payment failed!")
                     .setContentText("Your account value is too low.")
                     .setColor(Color.GREEN)
-                    .setSmallIcon(R.drawable.foodify_notification);
+                    .setSmallIcon(R.drawable.foodify_notification)
+                    .setContentIntent(pendI);
+
 
             readyIDList = readyID.split("/");
             for (String s : readyIDList) {
