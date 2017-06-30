@@ -1,10 +1,12 @@
 package com.esp1617.albertomoretto.foodify;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,9 +16,15 @@ public class PayReceiver extends BroadcastReceiver {
     private String itemsReady;
     private String readyID;
     private String[] readyIDList;
+    private int uniqueNotify;
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        uniqueNotify = -1;
+
+        final NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
         SharedPreferences billToPay = context.getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY,Context.MODE_PRIVATE);
         billsTotal = billToPay.getFloat(FoodifyTags.SHARED_BILL_TO_PAY, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
         itemsReady = billToPay.getString(FoodifyTags.SHARED_ORDERS_LIST_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
@@ -36,7 +44,6 @@ public class PayReceiver extends BroadcastReceiver {
             billsTotal = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
             itemsReady = FoodifyConstants.DEFAULT_ITEMS_READY;
 
-            final NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             readyIDList = readyID.split("/");
             for (String s : readyIDList) {
                 Log.d("TEMP ID",s);
@@ -54,9 +61,32 @@ public class PayReceiver extends BroadcastReceiver {
             editorAcc.commit();
 
         } else {
-            Toast paymentFailed = Toast.makeText(context,"You don't have enough money! \n Tap on notification body.",Toast.LENGTH_LONG);
-            paymentFailed.show();
+            /*Toast paymentFailed = Toast.makeText(context,"You don't have enough money! \n Tap on notification body.",Toast.LENGTH_LONG);
+            paymentFailed.show();*/
+
+            final Notification.Builder mNotifyBuilder = new Notification.Builder(context)
+                    .setContentTitle("Payment failed!")
+                    .setContentText("Your account value is too low.")
+                    .setColor(Color.GREEN)
+                    .setSmallIcon(R.drawable.foodify_notification);
+
+            readyIDList = readyID.split("/");
+            for (String s : readyIDList) {
+                Log.d("TEMP ID",s);
+                int tempID = Integer.parseInt(s);
+                if(uniqueNotify == -1) {
+                    uniqueNotify = tempID;
+                    mNotificationManager.notify(uniqueNotify,
+                            mNotifyBuilder.build());
+                }
+                else {
+                    mNotificationManager.cancel(tempID);
+                }
+
+                readyID = FoodifyConstants.DEFAULT_ITEMS_READY + uniqueNotify + "/";
+                editor.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
+                editor.commit();
+            }
         }
-        //throw new UnsupportedOperationException("Not yet implemented");
     }
 }
