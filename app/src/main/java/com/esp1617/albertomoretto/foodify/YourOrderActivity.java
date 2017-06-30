@@ -40,7 +40,7 @@ public class YourOrderActivity extends AppCompatActivity {
         selectedItems = getIntent().getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
         totalOrderSize = getIntent().getIntExtra(FoodifyTags.EXTRA_SIZE_ORDER,0);
 
-        SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
+        SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY, Context.MODE_PRIVATE);
         Log.d("sharedpref", "good");
         notifyID = sharedPrefNotify.getInt(FoodifyTags.ORDER_NOTIFICATION, FoodifyConstants.DEFAULT_ORDER_ID);
 
@@ -101,7 +101,7 @@ public class YourOrderActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY, Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(FoodifyTags.ORDER_NOTIFICATION, notifyID);
@@ -114,7 +114,7 @@ public class YourOrderActivity extends AppCompatActivity {
     {
         if(notifyID<FoodifyConstants.MAX_NOTIFY_ID) notifyID++;
         else notifyID = 0;
-        SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.ORDER_NOTIFICATION, Context.MODE_PRIVATE);
+        SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY, Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPrefNotify.edit();
         editor.putInt(FoodifyTags.ORDER_NOTIFICATION, notifyID);

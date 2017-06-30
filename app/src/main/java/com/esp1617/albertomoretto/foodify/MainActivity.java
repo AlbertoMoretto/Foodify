@@ -46,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mSettingsImageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                openReset();
+            }
+        });
     }
 
 
@@ -59,4 +64,9 @@ public class MainActivity extends AppCompatActivity {
         foodIntent = new Intent(this, FoodActivity.class);
         startActivity(foodIntent);
     }
+    private void openReset(){
+        foodIntent = new Intent(this, ResetActivity.class);
+        startActivity(foodIntent);
+    }
+
 }

@@ -24,9 +24,9 @@ public class AccountActivity extends AppCompatActivity {
         mBillTextView = (TextView) findViewById(R.id.bill_text_view);
         mAddMoneyButton = (Button) findViewById(R.id.add_money_button);
         SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
-
-
         savedBillValue = sharedPref.getFloat(FoodifyTags.BILL_VALUE, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
+
+
         if(savedBillValue> 0.0f && savedBillValue < FoodifyConstants.DEFAULT_MEDIUM_PRICE) mBillTextView.setTextColor(Color.RED);
         if(savedBillValue>= FoodifyConstants.DEFAULT_MEDIUM_PRICE) mBillTextView.setTextColor(Color.GREEN);
         mBillTextView.setText(""+savedBillValue+"$");
