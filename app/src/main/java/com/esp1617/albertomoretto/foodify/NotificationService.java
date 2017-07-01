@@ -16,9 +16,6 @@ import android.util.Log;
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
- * <p>
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
  */
 public class NotificationService extends IntentService {
 
@@ -33,7 +30,6 @@ public class NotificationService extends IntentService {
 
     private float billsTotal;
     private String itemsReady;
-    private String readyID;
 
 
     public NotificationService() {
@@ -50,7 +46,7 @@ public class NotificationService extends IntentService {
                 selectedItems = intent.getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
                 totalP = intent.getFloatExtra(FoodifyTags.EXTRA_PRICE_ORDER,0.0f);
                 preparation_time = orderDim*DEFAULT_PREPARATION_TIME;
-                handleActionStartTimer(preparation_time,notifyID,orderDim,selectedItems,totalP);
+                handleActionStartTimer(preparation_time,notifyID,selectedItems,totalP);
             }
         }
     }
@@ -59,12 +55,12 @@ public class NotificationService extends IntentService {
      * Handle action startTimer in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionStartTimer(long time, int notifyIDN, int orderDimN, String selectedItemsN, float totalPN) {
+    private void handleActionStartTimer(long time, int notifyIDN, String selectedItemsN, float totalPN) {
 
         final NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         final Notification.Builder mNotifyBuilder = new Notification.Builder(this)
-                .setContentTitle(getResources().getString(R.string.notification_order)+" "+notifyIDN+" "+getResources().getString(R.string.notification_order_preparation_title))
+                .setContentTitle(getResources().getString(R.string.notification_order)+" "+notifyIDN)
                 .setContentText(getResources().getString(R.string.notification_order_preparation_text))
                 .setColor(Color.GREEN)
                 .setSmallIcon(R.drawable.foodify_notification)
@@ -96,6 +92,7 @@ public class NotificationService extends IntentService {
         intentPay.setAction(FoodifyTags.CUSTOM_INTENT_PAYMENT);
 
         intentPay.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,totalPN);
+        intentPay.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,notifyIDN);
         PendingIntent pendIntentPay = PendingIntent.getBroadcast(getApplicationContext(),FoodifyTags.BROADCAST_PAYMENT_REQUEST_CODE,intentPay,PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification.Action action = new Notification.Action.Builder(R.drawable.order_icon_button, getString(R.string.bill_pay_label), pendIntentPay).build();
@@ -115,16 +112,13 @@ public class NotificationService extends IntentService {
         SharedPreferences billToPay = getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY,Context.MODE_PRIVATE);
         billsTotal = billToPay.getFloat(FoodifyTags.SHARED_BILL_TO_PAY, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
         itemsReady = billToPay.getString(FoodifyTags.SHARED_ORDERS_LIST_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
-        readyID = billToPay.getString(FoodifyTags.SHARED_ID_ORDERS_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
 
         billsTotal += totalPN;
         itemsReady = itemsReady + selectedItemsN;
-        readyID = readyID + notifyIDN + "/";
 
         SharedPreferences.Editor editor = billToPay.edit();
         editor.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
         editor.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
-        editor.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
         editor.commit();
 
 

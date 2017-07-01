@@ -18,23 +18,15 @@ import android.widget.Toast;
 
 
 public class CheckOutActivity extends AppCompatActivity {
-    private int notifyID;
-    private String bill;
-    private float total;
-    private float savedBillValue;
-    private String account;
-    private String totalOrder;
 
+    private float savedBillValue;
     private float billsTotal;
     private String itemsReady;
-    private String readyID;
-    private String[] readyIDList;
-
-
     private TextView mAccountTextView;
     private TextView mTotalBillTextView;
     private TextView mBillListTextView;
     private Button mPayButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,38 +40,16 @@ public class CheckOutActivity extends AppCompatActivity {
         SharedPreferences billToPay = getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY,Context.MODE_PRIVATE);
         billsTotal = billToPay.getFloat(FoodifyTags.SHARED_BILL_TO_PAY, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
         itemsReady = billToPay.getString(FoodifyTags.SHARED_ORDERS_LIST_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
-        readyID = billToPay.getString(FoodifyTags.SHARED_ID_ORDERS_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
 
         Log.d("CheckoutActivity","Shared variables setted");
         Log.d("CheckoutActivity",itemsReady);
-        Log.d("CheckoutActivity",readyID);
-        /*notifyID = getIntent().getIntExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,0);
         final NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.cancel(notifyID);*/
-        final NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        readyIDList = readyID.split("/");
-        for (String s : readyIDList) {
-            Log.d("TEMP ID",s);
-            int tempID =Integer.parseInt(s);
-            mNotificationManager.cancel(tempID);
-        }
-        readyID = FoodifyConstants.DEFAULT_ITEMS_READY;
-        SharedPreferences.Editor editorN = billToPay.edit();
-        editorN.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
-        editorN.commit();
-
-
-
-        //bill = getIntent().getStringExtra(FoodifyTags.EXTRA_ITEMS_ORDER);
-        //total = getIntent().getFloatExtra(FoodifyTags.EXTRA_PRICE_ORDER,0.0f);
+        mNotificationManager.cancelAll();
 
         mAccountTextView = (TextView) findViewById(R.id.bill_account_textView);
         mTotalBillTextView = (TextView) findViewById(R.id.bill_total_textView);
         mBillListTextView = (TextView) findViewById(R.id.bill_items_textView);
         mPayButton = (Button) findViewById(R.id.bill_pay_button);
-
-        /*account = getResources().getString(R.string.account_label)+" "+savedBillValue;
-        totalOrder = getResources().getString(R.string.bill_total_order_label)+" "+total;*/
 
         mAccountTextView.setText(getResources().getString(R.string.account_label)+" $"+savedBillValue);
         mBillListTextView.setText(itemsReady);

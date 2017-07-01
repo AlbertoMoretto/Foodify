@@ -13,7 +13,7 @@ public class ResetActivity extends AppCompatActivity {
     private float billsTotal;
     private float savedBillValue;
     private String itemsReady;
-    private String readyID;
+    //private String readyID;
     private int countID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class ResetActivity extends AppCompatActivity {
         savedBillValue = sharedPref.getFloat(FoodifyTags.BILL_VALUE, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
         billsTotal = billToPay.getFloat(FoodifyTags.SHARED_BILL_TO_PAY, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
         itemsReady = billToPay.getString(FoodifyTags.SHARED_ORDERS_LIST_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
-        readyID = billToPay.getString(FoodifyTags.SHARED_ID_ORDERS_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
         countID = billToPay.getInt(FoodifyTags.ORDER_NOTIFICATION, FoodifyConstants.DEFAULT_ORDER_ID);
         final SharedPreferences.Editor editorBill = billToPay.edit();
         final SharedPreferences.Editor editorAcc = sharedPref.edit();
@@ -38,16 +37,13 @@ public class ResetActivity extends AppCompatActivity {
                 savedBillValue  = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
                 billsTotal = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
                 itemsReady = FoodifyConstants.DEFAULT_ITEMS_READY;
-                readyID = FoodifyConstants.DEFAULT_ITEMS_READY;
                 countID = FoodifyConstants.DEFAULT_ORDER_ID;
 
-
-                editorBill.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
                 editorBill.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
                 editorBill.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
                 editorBill.putInt(FoodifyTags.ORDER_NOTIFICATION, countID);
                 editorBill.commit();
-                editorAcc.putFloat(FoodifyTags.BILL_VALUE, billsTotal);
+                editorAcc.putFloat(FoodifyTags.BILL_VALUE, savedBillValue);
                 editorAcc.commit();
             }
         });

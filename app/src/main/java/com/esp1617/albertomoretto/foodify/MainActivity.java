@@ -1,8 +1,11 @@
 package com.esp1617.albertomoretto.foodify;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -13,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mFoodImageButton;
     private ImageButton mAlaSoftImageButton;
     private ImageButton mSettingsImageButton;
+    private int pendingNotification;
 
     private Toast creditToast;
     private Intent billIntent, foodIntent;
@@ -20,7 +24,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getIntent().getExtras() != null && getIntent().getExtras().getBoolean("EXIT",false)) finish();
+        pendingNotification=getIntent().getIntExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,0);
+        Log.d("Notification ID",""+pendingNotification);
+        if(getIntent().getExtras() != null && getIntent().getExtras().getBoolean(FoodifyTags.EXTRA_EXIT_APP,false)) finish();
+        else if(pendingNotification!=0)
+        {
+            Log.d("Notification ID",""+pendingNotification);
+            final NotificationManager mNotificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.cancel(pendingNotification);
+
+        }
         setContentView(R.layout.activity_main);
         mBillImageButton = (ImageButton) findViewById(R.id.imageButtonBill);
         mFoodImageButton = (ImageButton) findViewById(R.id.imageButtonFood);

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.service.notification.StatusBarNotification;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,21 +16,19 @@ public class PayReceiver extends BroadcastReceiver {
     private float billsTotal;
     private float myAccount;
     private String itemsReady;
-    private String readyID;
-    private String[] readyIDList;
-    private int uniqueNotify;
+    private int notificationIDCaller;
+    StatusBarNotification[] activeNotification;
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        uniqueNotify = -1;
+        notificationIDCaller = intent.getIntExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,FoodifyConstants.DEFAULT_ORDER_ID);
 
         final NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         SharedPreferences billToPay = context.getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY,Context.MODE_PRIVATE);
         billsTotal = billToPay.getFloat(FoodifyTags.SHARED_BILL_TO_PAY, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
         itemsReady = billToPay.getString(FoodifyTags.SHARED_ORDERS_LIST_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
-        readyID = billToPay.getString(FoodifyTags.SHARED_ID_ORDERS_READY,FoodifyConstants.DEFAULT_ITEMS_READY);
         SharedPreferences sharedPref = context.getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
         myAccount = sharedPref.getFloat(FoodifyTags.BILL_VALUE, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
 
@@ -39,21 +38,34 @@ public class PayReceiver extends BroadcastReceiver {
         Log.d("PayReceiver","Broadcast receiver attivato");
         Log.d("Soldi account",""+myAccount);
         Log.d("Totale ordine",""+billsTotal);
+
+        final Notification.Builder mNotifyBuilder = new Notification.Builder(context);
+        activeNotification = mNotificationManager.getActiveNotifications();
+        for(int x = 0; x<activeNotification.length;x++)
+        {
+            if(activeNotification[x].getId() != notificationIDCaller) mNotificationManager.cancel(activeNotification[x].getId());
+        }
+
         if(myAccount >= billsTotal) {
             myAccount -= billsTotal;
 
             billsTotal = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
             itemsReady = FoodifyConstants.DEFAULT_ITEMS_READY;
 
-            readyIDList = readyID.split("/");
-            for (String s : readyIDList) {
-                Log.d("TEMP ID",s);
-                int tempID =Integer.parseInt(s);
-                mNotificationManager.cancel(tempID);
-            }
-            readyID = FoodifyConstants.DEFAULT_ITEMS_READY;
 
-            editor.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
+            Intent ok = new Intent(context, MainActivity.class);
+            ok.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,notificationIDCaller);
+            PendingIntent pendOk = PendingIntent.getActivity(context,0,ok,PendingIntent.FLAG_UPDATE_CURRENT);
+
+            mNotifyBuilder.setContentTitle(context.getResources().getString(R.string.notification_payment_success_title))
+                    .setContentText(context.getResources().getString(R.string.notification_payment_success_text))
+                    .setColor(Color.GREEN)
+                    .setSmallIcon(R.drawable.foodify_notification)
+                    .setContentIntent(pendOk);
+            mNotificationManager.notify(notificationIDCaller,
+                    mNotifyBuilder.build());
+
+
             editor.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
             editor.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
             editor.commit();
@@ -62,37 +74,19 @@ public class PayReceiver extends BroadcastReceiver {
             editorAcc.commit();
 
         } else {
-            /*Toast paymentFailed = Toast.makeText(context,"You don't have enough money! \n Tap on notification body.",Toast.LENGTH_LONG);
-            paymentFailed.show();*/
 
             Intent i = new Intent(context, CheckOutActivity.class);
             PendingIntent pendI = PendingIntent.getActivity(context,0,i,PendingIntent.FLAG_UPDATE_CURRENT);
 
-            final Notification.Builder mNotifyBuilder = new Notification.Builder(context)
-                    .setContentTitle(context.getResources().getString(R.string.notification_payment_failed_title))
+            mNotifyBuilder.setContentTitle(context.getResources().getString(R.string.notification_payment_failed_title))
                     .setContentText(context.getResources().getString(R.string.notification_payment_failed_text))
                     .setColor(Color.GREEN)
                     .setSmallIcon(R.drawable.foodify_notification)
                     .setContentIntent(pendI);
 
+            mNotificationManager.notify(notificationIDCaller,
+                    mNotifyBuilder.build());
 
-            readyIDList = readyID.split("/");
-            for (String s : readyIDList) {
-                Log.d("TEMP ID",s);
-                int tempID = Integer.parseInt(s);
-                if(uniqueNotify == -1) {
-                    uniqueNotify = tempID;
-                    mNotificationManager.notify(uniqueNotify,
-                            mNotifyBuilder.build());
-                }
-                else {
-                    mNotificationManager.cancel(tempID);
-                }
-
-                readyID = FoodifyConstants.DEFAULT_ITEMS_READY + uniqueNotify + "/";
-                editor.putString(FoodifyTags.SHARED_ID_ORDERS_READY, readyID);
-                editor.commit();
-            }
         }
     }
 }

@@ -19,7 +19,7 @@ public class FoodifyTags {
     public static String CUSTOM_INTENT_PAYMENT = "com.esp1617.albertomoretto.custom_intent_payment";
     public static int BROADCAST_PAYMENT_REQUEST_CODE = 12345;
 
-
+    public static String EXTRA_EXIT_APP = "com.esp1617.albertomoretto.extra_exit_app";
     public static String EXTRA_PRICE_SETTED = "com.esp1617.albertomoretto.price_setted";
     public static String EXTRA_ORDER_SETTED = "com.esp1617.albertomoretto.order_setted";
 
@@ -28,6 +28,7 @@ public class FoodifyTags {
     public static String EXTRA_SIZE_ORDER = "com.esp1617.albertomoretto.size_order";
 
     public static String EXTRA_NOTIFY_ID_ORDER = "com.esp1617.albertomoretto.notify_id_order";
+
 
     public static final String KEY_ORDER_PAY = "key_order_pay";
 
