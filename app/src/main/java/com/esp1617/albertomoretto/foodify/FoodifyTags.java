@@ -46,5 +46,6 @@ public class FoodifyTags {
     public static final String SHARED_PREF_ORDER_READY = "com.esp1617.albertomoretto.foodify_shared_pref_order_ready";
     public static final String SHARED_BILL_TO_PAY = "com.esp1617.albertomoretto.foodify_shared_bill_to_pay";
     public static final String SHARED_ORDERS_LIST_READY = "com.esp1617.albertomoretto.foodify_shared_orders_list_ready";
-    public static final String SHARED_ID_ORDERS_READY = "com.esp1617.albertomoretto.foodify_shared_id_orders_ready";
+
+    public static final String NOTIFICATION_ORDERS_READY_GROUP = "com.esp1617.albertomoretto.foodify_notification_orders_ready_group";
 }

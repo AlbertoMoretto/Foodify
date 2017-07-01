@@ -9,7 +9,10 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.CountDownTimer;
+import android.service.notification.Condition;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
@@ -77,6 +80,7 @@ public class NotificationService extends IntentService {
 
         while((System.currentTimeMillis()-orderPrep)<0) {}
 
+
         mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
                 .setContentText(getResources().getString(R.string.notification_order_done))
                 .setUsesChronometer(false)
@@ -97,11 +101,12 @@ public class NotificationService extends IntentService {
 
         Notification.Action action = new Notification.Action.Builder(R.drawable.order_icon_button, getString(R.string.bill_pay_label), pendIntentPay).build();
 
-
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
                 .setContentText(getResources().getString(R.string.notification_order_done))
                 .setOngoing(false)
-                .addAction(action);
+                .addAction(action)
+                .setSound(alarmSound);
 
         Notification.BigTextStyle bill = new Notification.BigTextStyle();
         bill.setBigContentTitle(getResources().getString(R.string.notification_order_ready));
