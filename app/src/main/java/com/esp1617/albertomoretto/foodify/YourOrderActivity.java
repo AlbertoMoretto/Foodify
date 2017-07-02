@@ -12,6 +12,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Activity che mostra all'utente il contenuto del suo ordine, dando la possibilità di confermarlo
+ * oppure cancellarlo.
+ * In caso di conferma dell'ordine viene lanciato NotificationService e si passa alla MainActivity con
+ * un messaggio di chiusura applicazione.
+ * In caso di cancellazione l'ordine viene eliminato e si può iniziare una nuova ordinazione (con il tasto
+ * indietro viene creata nuovamente Foodactivity).
+ * Se si preme il tasto indietro senza compiere nessuna azione (cioè senza premere nessuno dei due pulsanti)
+ * viene comunque cancellata l'ordinazione e lanciata FoodActivity, perdendo ogni riferimento all'ordinazione
+ * che si stava facendo.
+ */
 public class YourOrderActivity extends AppCompatActivity {
 
     private float totalPrice;
@@ -102,10 +113,16 @@ public class YourOrderActivity extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Metodo per aggiornare il valore dell'ID della notifica (e dell'ordine) nelle SharedPreferences
+     * Se il valore dell'ID della notifica (aggiornata) eccede il valore massimo viene messa nuovamente con
+     * il valore di default.
+     */
     private void updateNotifyID()
     {
         if(notifyID<FoodifyConstants.MAX_NOTIFY_ID) notifyID++;
-        else notifyID = 0;
+        else notifyID = FoodifyConstants.DEFAULT_ORDER_ID;
         SharedPreferences sharedPrefNotify = getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY, Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPrefNotify.edit();
