@@ -13,8 +13,8 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
+ * Sottoclasse di IntentService per gestire richieste di task asincroni
+ * in un servizio su un thread separato
  */
 public class NotificationService extends IntentService {
 
@@ -50,8 +50,13 @@ public class NotificationService extends IntentService {
     }
 
     /**
-     * Handle action start timer in the provided background thread with the provided
-     * parameters.
+     * Metodo per gestire la creazione della notifica di un'ordine in preparazione,
+     * impostando nella notifica il cronometro il rispettivo tempo di preparazione,
+     * e l'aggiornamento della notifica quando finisce il timer.
+     * @param time tempo di preparazione dell'ordine
+     * @param notifyIDN ID della notifica da creare
+     * @param selectedItemsN stringa contenente gli elementi dell'ordinazione
+     * @param totalPN prezzo totale dell'ordine
      */
     private void handleActionStartTimer(long time, int notifyIDN, String selectedItemsN, float totalPN) {
 
