@@ -38,7 +38,6 @@ public class FoodifyTags {
     //DEBUG TAGS
     //CLASS NAMES
     public static final String FOOD_ACTIVITY_TAG ="FoodActivity";
-    public static final String POP_UP_ACTIVITY_TAG ="PopUpActivity";
 
     /* TAGS FOR SERVICES */
     public static String ACTION_START = "TimerStart";

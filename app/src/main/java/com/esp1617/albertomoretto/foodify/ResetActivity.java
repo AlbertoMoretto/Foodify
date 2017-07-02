@@ -15,7 +15,6 @@ public class ResetActivity extends AppCompatActivity {
     private float billsTotal;
     private float savedBillValue;
     private String itemsReady;
-    //private String readyID;
     private int countID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

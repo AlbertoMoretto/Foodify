@@ -117,6 +117,7 @@ public class CheckOutActivity extends AppCompatActivity {
         if (requestCode == FoodifyTags.ACCOUNT_CHARGING) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
+                Log.d("Activity result","ok");
             }
         }
 
