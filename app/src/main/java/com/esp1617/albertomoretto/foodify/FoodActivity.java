@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+// Activity che gestisce il menù da cui si apriranno le varie pop up activty
 public class FoodActivity extends AppCompatActivity {
     private float savedAccountValue;
     private float orderValue;
@@ -59,38 +60,39 @@ public class FoodActivity extends AppCompatActivity {
 
         mAccountTextView.setText(""+savedAccountValue+"$");
 
+        // Aggiungo i listener alle voci del menù
         mHamburgerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch PopUpActivity with data from the launcher
+                // lancia PopUpActivity degli hamburger
                 popUpLauncher(FoodifyTags.HAMBURGER);
             }
         });
         mHotDogLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch PopUpActivity with data from the launcher
+                // lancia PopUpActivity degli hotdog
                 popUpLauncher(FoodifyTags.HOT_DOG);
             }
         });
         mFriesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch PopUpActivity with data from the launcher
+                // lancia PopUpActivity delle patatine
                 popUpLauncher(FoodifyTags.FRIES);
             }
         });
         mDrinkLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch PopUpActivity with data from the launcher
+                // lancia PopUpActivity delle bevande
                 popUpLauncher(FoodifyTags.DRINK);
             }
         });
         mDessertLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch PopUpActivity with data from the launcher
+                // lancia PopUpActivity dei dessert
                 popUpLauncher(FoodifyTags.DESSERT);
             }
         });
@@ -99,7 +101,7 @@ public class FoodActivity extends AppCompatActivity {
         mAccountLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch AccountActivity
+                // lancia AccountActivity
                 openAccount();
             }
         });
@@ -107,7 +109,7 @@ public class FoodActivity extends AppCompatActivity {
         mShowOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //launch PopUpActivity with data from the launcher
+                // lancia activity del riepilogo ordine
                 showOrder(orderValue,orderComponents,orderSize);
             }
         });
@@ -115,19 +117,16 @@ public class FoodActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
+        // Controlla a che richiesta stiamo rispondendo
         if (requestCode == FoodifyTags.POPUP_CONFIRM_REQUEST) {
-            // Make sure the request was successful
+            // Si assicura che la richiesta abbia avuto successo
             if (resultCode == RESULT_OK) {
                 orderSize++;
                 orderComponents += data.getStringExtra(FoodifyTags.EXTRA_ORDER_SETTED);
                 Log.d("Order",orderComponents);
+                // ottiene i valori del prezzo e la lista ingredienti dalla PopUpActivity
                 orderValue += data.getFloatExtra(FoodifyTags.EXTRA_PRICE_SETTED,0.0f);
                 mOrderTextView.setText(""+orderValue+"$");
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
-
-                // Do something with the contact here (bigger example below)
             }
         }
 
@@ -143,7 +142,11 @@ public class FoodActivity extends AppCompatActivity {
 
     }
 
-    //method used to start PopUpActivity, passing to it the caller via intent putExtra
+
+    /**
+     * Metodo che avvia la PopUpActivity relativa alla stringa
+     * @param componentCaller
+     */
     private void popUpLauncher(String componentCaller){
         Intent intent = new Intent(this, PopUpActivity.class);
         intent.putExtra(FoodifyTags.SELECT_FOOD_CALLER, componentCaller);
@@ -151,6 +154,12 @@ public class FoodActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo che avvia l'activity YourOrderActivity che visualizzerà l'ordine
+     * @param orderPrice prezzo dell'ordine
+     * @param orderItems pietanze e ingredienti dell'ordine
+     * @param totalOrder grandezza pietanze ordinate
+     */
     private void showOrder(float orderPrice, String orderItems, int totalOrder) {
         Intent showOrder = new Intent(this, YourOrderActivity.class);
         showOrder.putExtra(FoodifyTags.EXTRA_PRICE_ORDER,orderPrice);
@@ -159,7 +168,11 @@ public class FoodActivity extends AppCompatActivity {
         startActivity(showOrder);
         finish();
     }
-    // THIS MUST BE CHANGED, openAccount is declared in the same way in MainActivity and it does the same thing
+
+    /**
+     * Metodo per avviare l'activity AccountActivity che mostrerà i soldi sul
+     * proprio conto
+     */
     public void openAccount(){
         billIntent = new Intent(this, AccountActivity.class);
         startActivity(billIntent);
