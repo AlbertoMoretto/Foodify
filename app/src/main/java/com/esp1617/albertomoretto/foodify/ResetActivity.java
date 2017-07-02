@@ -2,14 +2,17 @@ package com.esp1617.albertomoretto.foodify;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ResetActivity extends AppCompatActivity {
     private Button mResetButton;
+    private TextView mResetTextView;
     private float billsTotal;
     private float savedBillValue;
     private String itemsReady;
@@ -30,10 +33,15 @@ public class ResetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset);
         mResetButton = (Button) findViewById(R.id.reset_button);
+        mResetTextView = (TextView) findViewById(R.id.reset_textView);
 
 
         mResetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mResetButton.setVisibility(View.GONE);
+                mResetTextView.setTextColor(Color.BLACK);
+                mResetTextView.setText(getResources().getString(R.string.reset_OK_message));
+
                 savedBillValue  = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
                 billsTotal = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
                 itemsReady = FoodifyConstants.DEFAULT_ITEMS_READY;

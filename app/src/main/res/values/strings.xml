@@ -38,6 +38,9 @@
     <string name="kit_kat_label">Kit-Kat</string>
     <string name="jelly_bean_label">Jelly Bean</string>
     <string name="ice_cream_sandwich_label">Ice Cream Sandwich</string>
+    <string name="reset_label">RESET</string>
+    <string name="reset_warning_text">To reset all values press the button above.</string>
+    <string name="reset_OK_message">All application value have been reset</string>
 
 
     <string name="order_processing">Your order is being processed, it will be ready when the timer expires.\nYou can close the app.</string>

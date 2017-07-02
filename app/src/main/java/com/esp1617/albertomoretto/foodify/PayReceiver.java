@@ -17,7 +17,7 @@ public class PayReceiver extends BroadcastReceiver {
     private float myAccount;
     private String itemsReady;
     private int notificationIDCaller;
-    StatusBarNotification[] activeNotification;
+    private StatusBarNotification[] activeNotification;
 
     @Override
     public void onReceive(Context context, Intent intent) {

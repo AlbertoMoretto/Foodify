@@ -13,6 +13,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.service.notification.Condition;
+import android.service.notification.StatusBarNotification;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
@@ -30,6 +31,8 @@ public class NotificationService extends IntentService {
     private int notifyID;
     private float totalP;
     private String selectedItems;
+    private Uri alarmSound;
+    private StatusBarNotification[] activeNotification;
 
     private float billsTotal;
     private String itemsReady;
@@ -77,14 +80,12 @@ public class NotificationService extends IntentService {
         mNotificationManager.notify(notifyIDN,
                 mNotifyBuilder.build());
 
+        try {
+            Thread.sleep(time);
+        }catch(InterruptedException error) {
+            Log.d("Thread","ERROR SLEEP");
+        }
 
-        while((System.currentTimeMillis()-orderPrep)<0) {}
-
-
-        mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
-                .setContentText(getResources().getString(R.string.notification_order_done))
-                .setUsesChronometer(false)
-                .setOngoing(false);
 
         Intent i = new Intent(getApplicationContext(), CheckOutActivity.class);
         i.putExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,notifyIDN);
@@ -101,10 +102,12 @@ public class NotificationService extends IntentService {
 
         Notification.Action action = new Notification.Action.Builder(R.drawable.order_icon_button, getString(R.string.bill_pay_label), pendIntentPay).build();
 
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         mNotifyBuilder.setContentTitle(getResources().getString(R.string.notification_order_ready))
                 .setContentText(getResources().getString(R.string.notification_order_done))
                 .setOngoing(false)
+                .setUsesChronometer(false)
                 .addAction(action)
                 .setSound(alarmSound);
 
