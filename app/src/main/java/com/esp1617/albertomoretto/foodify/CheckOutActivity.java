@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+// Activity che completa l'ordine consentendo all'utente di pagare
 public class CheckOutActivity extends AppCompatActivity {
 
     private float savedBillValue;
@@ -30,8 +30,9 @@ public class CheckOutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("CheckoutActivity","Activity started");
         setContentView(R.layout.activity_check_out);
-        SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
 
+        //prendo i valori del prezzo e delle pietanze dalle shared preferences
+        SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
 
         savedBillValue = sharedPref.getFloat(FoodifyTags.BILL_VALUE, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
 
@@ -41,6 +42,8 @@ public class CheckOutActivity extends AppCompatActivity {
 
         Log.d("CheckoutActivity","Shared variables setted");
         Log.d("CheckoutActivity",itemsReady);
+
+        // creo una notification manager che userò successivamente per lanciare le notifiche
         final NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
 
@@ -55,29 +58,33 @@ public class CheckOutActivity extends AppCompatActivity {
 
         mBillListTextView.setMovementMethod(new ScrollingMovementMethod());
 
-
-
+        // aggiungo il listener al bottone per pagare
         mPayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // se ci sono abbastanza soldi sul conto
                 if(savedBillValue>=billsTotal) {
                     savedBillValue = savedBillValue - billsTotal;
 
                     billsTotal = FoodifyConstants.DEFAULT_ACCOUNT_VALUE;
                     itemsReady = FoodifyConstants.DEFAULT_ITEMS_READY;
 
+                    // shared preferences creata per salvarsi i valori dell'ordine
                     SharedPreferences billToPay = getSharedPreferences(FoodifyTags.SHARED_PREF_ORDER_READY,Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor2 = billToPay.edit();
                     editor2.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
                     editor2.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
                     editor2.apply();
 
+                    // shared preferences creata per salvarsi il valore del proprio conto
                     SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
 
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putFloat(FoodifyTags.BILL_VALUE, savedBillValue);
                     editor.apply();
 
+                    // cambia la grafica dell'activity visualizzando il messaggio che il pagamento
+                    // è stato effettuato con successo
                     mAccountTextView.setVisibility(View.GONE);
                     mTotalBillTextView.setVisibility(View.GONE);
                     mPayButton.setVisibility(View.GONE);
@@ -86,6 +93,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     mBillListTextView.setTextColor(Color.GREEN);
                     mBillListTextView.setText(R.string.payment_success_label);
 
+                    // fa in modo che una volta premuto sull'activity corrente torni al menù
                     mBillListTextView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -96,12 +104,15 @@ public class CheckOutActivity extends AppCompatActivity {
                         }
                     });
                 } else {
+                    // se non ci sono abbastanza soldi sul conto per pagare l'ordine visualizza un
+                    // messaggio di errore
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.payment_failed_label, Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
         });
 
+        // aggiunge un listener alla textview del proprio conto per poter aprire AccountActivity
         mAccountTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,9 +124,9 @@ public class CheckOutActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
+        // Controlla a che richiesta stiamo rispondendo
         if (requestCode == FoodifyTags.ACCOUNT_CHARGING) {
-            // Make sure the request was successful
+            // Si assicura che la richiesta abbia avuto successo
             if (resultCode == RESULT_OK) {
                 Log.d("Activity result","ok");
             }
@@ -127,6 +138,9 @@ public class CheckOutActivity extends AppCompatActivity {
     public void onResume()
     {
         super.onResume();
+        // Se l'activity viene riaperta dopo essere stata mandata in pausa va a controllare il
+        // valore del proprio conto (che potrebbe essere stato aggiornato dall'utente) nelle shared
+        // preferences
         SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
         savedBillValue = sharedPref.getFloat(FoodifyTags.BILL_VALUE, FoodifyConstants.DEFAULT_ACCOUNT_VALUE);
         mAccountTextView.setText(getResources().getString(R.string.account_label)+" $"+savedBillValue);

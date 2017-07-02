@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 //Activity che viene lanciata quando si sceglie un cibo dal menù di FoodActivity
-// https://www.youtube.com/watch?v=fn5OlqQuOCk
 
 public class PopUpActivity extends AppCompatActivity {
     private String selectedFood;
@@ -62,10 +61,14 @@ public class PopUpActivity extends AppCompatActivity {
     private CheckBox checkboxNougat;
 
 
-
     ArrayAdapter<String> breadAdapter, meatAdapter, sizeAdapter, typeAdapter;
     List<String> breadList, meatList,sizeList, typeList;
 
+    /**
+     * Metodo che passa i valori della pietanza scelta alla FoodActivity
+     * @param price prezzo totale
+     * @param order elenco pietanza e ingredienti
+     */
     private void setOrder(float price, String order) {
         Intent data = new Intent();
         data.putExtra(FoodifyTags.EXTRA_PRICE_SETTED,price);
@@ -91,19 +94,19 @@ public class PopUpActivity extends AppCompatActivity {
         drink = new Food("drink");
         dessert = new Food("dessert");
 
-        //Il layout che viene caricato varia a seconda del tipo di cibo che si sceglie
-        //Creare diversi layout per diversi cibi
+        // Il layout che viene caricato varia a seconda del tipo di cibo che si sceglie
+        // Creo diversi layout per diversi cibi
         switch (selectedFood) {
             case FoodifyTags.HAMBURGER:
                 setContentView(R.layout.activity_pop_up_hamburger);
 
-                //assegno i checkbox
+                // assegno i checkbox
                 checkboxSalad=(CheckBox) findViewById(R.id.checkBoxSalad);
                 checkboxTomatoes=(CheckBox) findViewById(R.id.checkBoxTomatoes);
                 checkboxHamburgerOnions=(CheckBox) findViewById(R.id.checkBoxHamburgerOnions);
                 checkboxCucumber=(CheckBox) findViewById(R.id.checkBoxCucumber);
 
-                //aggiungo gli ingredienti possibili
+                // aggiungo gli ingredienti possibili
                 hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_BUCKWHEAT_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_BUCKWHEAT_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
                 hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_SESAME_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_SESAME_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
                 hamburger.addIngredient(FoodifyConstants.BREAD_HAMBURGER_WHOLE_BREAD_NAME, FoodifyConstants.BREAD_HAMBURGER_WHOLE_BREAD_PRICE, FoodifyConstants.BREAD_CATEGORY);
@@ -126,7 +129,6 @@ public class PopUpActivity extends AppCompatActivity {
 
                 mMeatSpinner = (Spinner) findViewById(R.id.meat_type_spinner);
                 meatList = new ArrayList<String>();
-                //List<Food.IngredientSelected> hamburgerList= hamburger.getIngredients();
                 for(int i =0; i<hamburgerList.size(); i++){
                     if(hamburgerList.get(i).getIngredientName().getCategory().equals(FoodifyConstants.MEAT_CATEGORY)) {
                         meatList.add(hamburgerList.get(i).getIngredientName().getName());
@@ -141,7 +143,7 @@ public class PopUpActivity extends AppCompatActivity {
                 hamburger.addIngredient(FoodifyConstants.ONIONS,FoodifyConstants.ONIONS_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 hamburger.addIngredient(FoodifyConstants.CUCUMBER,FoodifyConstants.CUCUMBER_PRICE,FoodifyConstants.ADDITION_CATEGORY);
 
-                //dico cosa deve fare il bottone conferma
+                // dico cosa deve fare il bottone conferma
                 confirmHamburger= (Button) findViewById(R.id.buttonConfirmHamburger);
                 confirmHamburger.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -159,27 +161,28 @@ public class PopUpActivity extends AppCompatActivity {
                     }
                 });
 
+                // imposta layout personalizzato per la finestra pop-up
                 getWindow().setLayout((int) (width * .8), (int) (height * .6));
                 break;
 
             case FoodifyTags.HOT_DOG:
                 setContentView(R.layout.activity_pop_up_hot_dog);
 
-                //assegno i checkbox
+                // assegno i checkbox
                 checkboxBreadCrumbs=(CheckBox) findViewById(R.id.checkBoxBreadcrumbs);
                 checkboxHotdogOnions=(CheckBox) findViewById(R.id.checkBoxHotdogOnions);
                 checkboxMustard=(CheckBox) findViewById(R.id.checkBoxMustard);
                 checkboxHotdogMayo=(CheckBox) findViewById(R.id.checkBoxHotdogMayo);
                 checkboxHotdogKetchup=(CheckBox) findViewById(R.id.checkBoxHotdogKetchup);
 
-                //aggiungo gli ingredienti possibili
+                // aggiungo gli ingredienti possibili
                 hotDog.addIngredient(FoodifyConstants.BREADCRUMBS,FoodifyConstants.BREADCRUMBS_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 hotDog.addIngredient(FoodifyConstants.ONIONS,FoodifyConstants.ONIONS_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 hotDog.addIngredient(FoodifyConstants.MUSTARD,FoodifyConstants.MUSTARD_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 hotDog.addIngredient(FoodifyConstants.MAYONNAISE,FoodifyConstants.MAYONNAISE_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 hotDog.addIngredient(FoodifyConstants.KETCHUP,FoodifyConstants.KETCHUP_PRICE,FoodifyConstants.ADDITION_CATEGORY);
 
-                //dico cosa deve fare il tasto  conferma
+                // dico cosa deve fare il tasto  conferma
                 confirmHotdog= (Button) findViewById(R.id.buttonConfirmHotdog);
                 confirmHotdog.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -196,23 +199,24 @@ public class PopUpActivity extends AppCompatActivity {
                     }
                 });
 
+                // imposta layout personalizzato per la finestra pop-up
                 getWindow().setLayout((int) (width * .7), (int) (height * .5));
                 break;
 
             case FoodifyTags.FRIES:
                 setContentView(R.layout.activity_pop_up_fries);
 
-                //assegno i checkbox
+                // assegno i checkbox
                 checkboxBarbecueSauce=(CheckBox) findViewById(R.id.checkBoxBarbecueSauce);
                 checkboxFriesMayo=(CheckBox) findViewById(R.id.checkBoxFriesMayo);
                 checkboxFriesKetchup=(CheckBox) findViewById(R.id.checkBoxFriesKetchup);
 
-                //aggiungo gli ingredienti possibili
+                // aggiungo gli ingredienti possibili
                 fries.addIngredient(FoodifyConstants.BARBECUE_SAUCE,FoodifyConstants.BARBECUE_SAUCE_PRICE,FoodifyConstants.ADDITION_CATEGORY);                hotDog.addIngredient(FoodifyConstants.MAYONNAISE,FoodifyConstants.MAYONNAISE_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 fries.addIngredient(FoodifyConstants.MAYONNAISE,FoodifyConstants.MAYONNAISE_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 fries.addIngredient(FoodifyConstants.KETCHUP,FoodifyConstants.KETCHUP_PRICE,FoodifyConstants.ADDITION_CATEGORY);
 
-                //dico cosa deve fare il tasto conferma
+                // dico cosa deve fare il tasto conferma
                 confirmFries= (Button) findViewById(R.id.buttonConfirmFries);
                 confirmFries.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -227,13 +231,14 @@ public class PopUpActivity extends AppCompatActivity {
                     }
                 });
 
+                // imposta layout personalizzato per la finestra pop-up
                 getWindow().setLayout((int) (width * .6), (int) (height * .4));
                 break;
 
             case FoodifyTags.DRINK:
                 setContentView(R.layout.activity_pop_up_drink);
 
-                //aggiungo gli ingredienti possibili
+                // aggiungo gli ingredienti possibili
                 drink.addIngredient(FoodifyConstants.DRINK_SIZE_SMALL_NAME, FoodifyConstants.DRINK_SIZE_SMALL_PRICE, FoodifyConstants.SIZE_CATEGORY);
                 drink.addIngredient(FoodifyConstants.DRINK_SIZE_MEDIUM_NAME, FoodifyConstants.DRINK_SIZE_MEDIUM_PRICE, FoodifyConstants.SIZE_CATEGORY);
                 drink.addIngredient(FoodifyConstants.DRINK_SIZE_LARGE_NAME, FoodifyConstants.DRINK_SIZE_LARGE_PRICE, FoodifyConstants.SIZE_CATEGORY);
@@ -266,7 +271,7 @@ public class PopUpActivity extends AppCompatActivity {
                 typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 mTypeSpinner.setAdapter(typeAdapter);
 
-                //dico cosa deve fare il tasto conferma
+                // dico cosa deve fare il tasto conferma
                 confirmDrink= (Button) findViewById(R.id.buttonConfirmDrink);
                 confirmDrink.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -280,13 +285,14 @@ public class PopUpActivity extends AppCompatActivity {
                     }
                 });
 
+                // imposta layout personalizzato per la finestra pop-up
                 getWindow().setLayout((int) (width * .6), (int) (height * .4));
                 break;
 
             case FoodifyTags.DESSERT:
                 setContentView(R.layout.activity_pop_up_dessert);
 
-                //assegno i checkbox
+                // assegno i checkbox
                 checkboxIceCream=(CheckBox) findViewById(R.id.checkboxIceCream);
                 checkboxJellyBean=(CheckBox) findViewById(R.id.checkboxJallyBean);
                 checkboxKitkat=(CheckBox) findViewById(R.id.checkboxKitKat);
@@ -295,7 +301,7 @@ public class PopUpActivity extends AppCompatActivity {
                 checkboxNougat=(CheckBox) findViewById(R.id.checkboxNougat);
 
 
-                //aggiungo i vari dolci
+                // aggiungo i vari dolci
                 dessert.addIngredient(FoodifyConstants.ICE_CREAM_SANDWICH,FoodifyConstants.ICE_CREAM_SANDWICH_PRICE,FoodifyConstants.ADDITION_CATEGORY);                hotDog.addIngredient(FoodifyConstants.MAYONNAISE,FoodifyConstants.MAYONNAISE_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 dessert.addIngredient(FoodifyConstants.JELLY_BEAN,FoodifyConstants.JELLY_BEAN_PRICE,FoodifyConstants.ADDITION_CATEGORY);
                 dessert.addIngredient(FoodifyConstants.KIT_KAT,FoodifyConstants.KIT_KAT_PRICE,FoodifyConstants.ADDITION_CATEGORY);
@@ -304,7 +310,7 @@ public class PopUpActivity extends AppCompatActivity {
                 dessert.addIngredient(FoodifyConstants.NOUGAT,FoodifyConstants.NOUGAT_PRICE,FoodifyConstants.ADDITION_CATEGORY);
 
 
-                //dico cosa deve fare il tasto conferma
+                // dico cosa deve fare il tasto conferma
                 confirmDessert= (Button) findViewById(R.id.buttonConfirmDessert);
                 confirmDessert.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
@@ -323,6 +329,7 @@ public class PopUpActivity extends AppCompatActivity {
                     }
                 });
 
+                // imposta layout personalizzato per la finestra pop-up
                 getWindow().setLayout((int) (width * .6), (int) (height * .8));
                 break;
         }
