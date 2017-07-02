@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-
+//Activity iniziale dell'app che presenta quattro pulsanti che aprono rispettivamente:
+//Il proprio conto, Il menù per effettuare un ordine, Le impostazioni e I credits con un Toast
 public class MainActivity extends AppCompatActivity {
     private ImageButton mBillImageButton;
     private ImageButton mFoodImageButton;
@@ -24,8 +25,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         pendingNotification=getIntent().getIntExtra(FoodifyTags.EXTRA_NOTIFY_ID_ORDER,0);
         Log.d("Notification ID",""+pendingNotification);
+        //Se è appena stato elaborato un ordine, controllo l'intent che mi è stato passato e chiudo l'app
+        //Altrimenti sono nel caso in cui l'utente ha appena fatto tap su una notifica di ordine pagato con successo
         if(getIntent().getExtras() != null && getIntent().getExtras().getBoolean(FoodifyTags.EXTRA_EXIT_APP,false)) finish();
         else if(pendingNotification!=0)
         {
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         mFoodImageButton = (ImageButton) findViewById(R.id.imageButtonFood);
         mAlaSoftImageButton = (ImageButton) findViewById(R.id.imageButtonAlasoft);
         mSettingsImageButton = (ImageButton) findViewById(R.id.imageButtonSettings);
-
+        //Setting degli OnClickListener per i pulsanti
         mBillImageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 openAccount();
@@ -67,16 +71,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    //metodo che lancia AccountActivity, usato nell'OnClick di mAccount
     public void openAccount(){
         billIntent = new Intent(this, AccountActivity.class);
         startActivity(billIntent);
     }
 
+    //metodo che lancia FoodActivity, usato nell'OnClick di mFood
     private void openFood(){
         foodIntent = new Intent(this, FoodActivity.class);
         startActivity(foodIntent);
     }
+
+    //metodo che lancia ResetActivity, usato nell'OnClick di mSettings
     private void openReset(){
         foodIntent = new Intent(this, ResetActivity.class);
         startActivity(foodIntent);
