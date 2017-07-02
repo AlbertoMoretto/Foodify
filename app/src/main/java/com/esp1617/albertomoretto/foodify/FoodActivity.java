@@ -28,7 +28,6 @@ public class FoodActivity extends AppCompatActivity {
     private LinearLayout mFriesLayout;
     private LinearLayout mDrinkLayout;
     private LinearLayout mDessertLayout;
-    private LinearLayout mOrderLayout;
     private LinearLayout mAccountLayout;
 
     private Intent billIntent;
@@ -54,7 +53,6 @@ public class FoodActivity extends AppCompatActivity {
         mFriesLayout = (LinearLayout) findViewById(R.id.fries_linear_layout);
         mDrinkLayout = (LinearLayout) findViewById(R.id.drink_linear_layout);
         mDessertLayout = (LinearLayout) findViewById(R.id.dessert_linear_layout);
-        mOrderLayout = (LinearLayout) findViewById(R.id.order_linear_layout);
         mAccountLayout = (LinearLayout) findViewById(R.id.account_linear_layout);
 
         mShowOrderButton = (Button) findViewById(R.id.show_order);
@@ -97,13 +95,7 @@ public class FoodActivity extends AppCompatActivity {
             }
         });
 
-        mOrderLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //launch CheckoutActivity which show food ordered by user
-                openOrder();
-            }
-        });
+
         mAccountLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,8 +165,5 @@ public class FoodActivity extends AppCompatActivity {
         startActivity(billIntent);
     }
 
-    private void openOrder(){
-        //Launch an activity that represents items choosen by the user
-    }
 
 }

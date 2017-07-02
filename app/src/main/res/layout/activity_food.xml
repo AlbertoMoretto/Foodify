@@ -162,7 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center|right"
-                android:text="0.0$"
+                android:text="@string/starting_bill_dollars"
                 android:textSize="64sp"
                 />
 
@@ -200,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="0.0$"
+                android:text="@string/starting_bill_dollars"
                 android:textSize="64sp"
                 android:gravity="center|right"/>
         </LinearLayout>

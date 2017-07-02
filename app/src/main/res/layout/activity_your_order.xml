@@ -27,7 +27,7 @@
         android:paddingRight="40dp"
         android:paddingLeft="40dp"
         android:scrollbars="vertical"
-        android:text="TextView"
+        android:text="@string/notification_order"
         android:textColor="@android:color/black"
         android:textSize="24sp"/>
 <LinearLayout
