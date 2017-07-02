@@ -4,17 +4,12 @@ import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.RemoteInput;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.CountDownTimer;
-import android.service.notification.Condition;
-import android.service.notification.StatusBarNotification;
-import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 /**
@@ -27,13 +22,10 @@ public class NotificationService extends IntentService {
 
     private int orderDim;
     private long preparation_time;
-    private long orderPrep;
     private int notifyID;
     private float totalP;
     private String selectedItems;
     private Uri alarmSound;
-    private StatusBarNotification[] activeNotification;
-
     private float billsTotal;
     private String itemsReady;
 
@@ -58,7 +50,7 @@ public class NotificationService extends IntentService {
     }
 
     /**
-     * Handle action startTimer in the provided background thread with the provided
+     * Handle action start timer in the provided background thread with the provided
      * parameters.
      */
     private void handleActionStartTimer(long time, int notifyIDN, String selectedItemsN, float totalPN) {
@@ -72,7 +64,7 @@ public class NotificationService extends IntentService {
                 .setSmallIcon(R.drawable.foodify_notification)
                 .setUsesChronometer(true)
                 .setChronometerCountDown(true)
-                .setWhen(orderPrep=System.currentTimeMillis()+time)
+                .setWhen(System.currentTimeMillis()+time)
                 .setShowWhen(true)
                 .setOngoing(true);
 
@@ -132,8 +124,6 @@ public class NotificationService extends IntentService {
 
         mNotificationManager.notify(notifyIDN,
                 mNotifyBuilder.build());
-
-
     }
 
 }
