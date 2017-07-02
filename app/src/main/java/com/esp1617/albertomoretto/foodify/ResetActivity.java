@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Activity per azzerare tutte le variabili dell'applicazione, cioè il valore del conto, l'ID degli ordini
+ * (e rispettive notifiche), totale prezzo ordini in sospeso, lista elementi degli ordini in sospeso.
+ * Dopo aver premuto il bottone RESET verrà visualizzato un messaggio di avvenuto azzeramento delle variabili.
+ */
 public class ResetActivity extends AppCompatActivity {
     private Button mResetButton;
     private TextView mResetTextView;
