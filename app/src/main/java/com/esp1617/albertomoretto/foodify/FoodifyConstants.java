@@ -6,7 +6,8 @@ package com.esp1617.albertomoretto.foodify;
 
 public class FoodifyConstants {
 
-
+    public static final String HOTDOG = "hotdog";
+    public static final String FRIES = "fries";
 
 
     public static final float STANDARD_ACCOUNT_UPDATE_VALUE = 1.5f;

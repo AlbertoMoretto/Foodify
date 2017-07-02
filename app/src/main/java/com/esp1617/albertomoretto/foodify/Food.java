@@ -17,12 +17,10 @@ public class Food {
         ingredients = new ArrayList<IngredientSelected>();
         totalPrice = 0;
 
-        //se viene inizializzato un oggetto hotdog o fries aggiungo un ingrediente con un prezzo di base dato che non
-        //si può scegliere nella pop up activity
-        if (name.equals("hotdog")){
+        if (name.equals(FoodifyConstants.HOTDOG)){
             addIngredient(FoodifyConstants.BASIC_HOTDOG_INGREDIENTS,FoodifyConstants.BASIC_HOTDOG_INGREDIENTS_PRICE,FoodifyConstants.ADDITION_CATEGORY);
             setIngredientSelected(FoodifyConstants.BASIC_HOTDOG_INGREDIENTS,true);
-        }else if (name.equals("fries")){
+        }else if (name.equals(FoodifyConstants.FRIES)){
             addIngredient(FoodifyConstants.BASIC_FRIES_INGREDIENTS,FoodifyConstants.BASIC_FRIES_INGREDIENTS_PRICE,FoodifyConstants.ADDITION_CATEGORY);
             setIngredientSelected(FoodifyConstants.BASIC_FRIES_INGREDIENTS,true);
         }
@@ -110,10 +108,6 @@ public class Food {
         public void setSelected(boolean value){
             selected = value;
         }
-
-        /*public void setDeselected(){
-            selected = false;
-        }*/
 
         public boolean getSelected(){
             return selected;
