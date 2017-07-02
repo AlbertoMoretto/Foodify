@@ -97,7 +97,7 @@ public class YourOrderActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(FoodifyTags.ORDER_NOTIFICATION, notifyID);
-        editor.commit();
+        editor.apply();
 
 
     }
@@ -110,6 +110,6 @@ public class YourOrderActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPrefNotify.edit();
         editor.putInt(FoodifyTags.ORDER_NOTIFICATION, notifyID);
-        editor.commit();
+        editor.apply();
     }
 }

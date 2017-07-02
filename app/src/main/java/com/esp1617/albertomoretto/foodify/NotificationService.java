@@ -119,7 +119,7 @@ public class NotificationService extends IntentService {
         SharedPreferences.Editor editor = billToPay.edit();
         editor.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
         editor.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
-        editor.commit();
+        editor.apply();
 
 
         mNotificationManager.notify(notifyIDN,

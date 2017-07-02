@@ -67,10 +67,10 @@ public class PayReceiver extends BroadcastReceiver {
 
             editor.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
             editor.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
-            editor.commit();
+            editor.apply();
 
             editorAcc.putFloat(FoodifyTags.BILL_VALUE, myAccount);
-            editorAcc.commit();
+            editorAcc.apply();
 
         } else {
 

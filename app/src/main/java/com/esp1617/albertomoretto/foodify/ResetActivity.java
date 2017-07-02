@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ResetActivity extends AppCompatActivity {
     private Button mResetButton;
@@ -50,9 +49,9 @@ public class ResetActivity extends AppCompatActivity {
                 editorBill.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
                 editorBill.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
                 editorBill.putInt(FoodifyTags.ORDER_NOTIFICATION, countID);
-                editorBill.commit();
+                editorBill.apply();
                 editorAcc.putFloat(FoodifyTags.BILL_VALUE, savedBillValue);
-                editorAcc.commit();
+                editorAcc.apply();
             }
         });
 

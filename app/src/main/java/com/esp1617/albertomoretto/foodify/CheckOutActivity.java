@@ -7,12 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,13 +70,13 @@ public class CheckOutActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor2 = billToPay.edit();
                     editor2.putFloat(FoodifyTags.SHARED_BILL_TO_PAY, billsTotal);
                     editor2.putString(FoodifyTags.SHARED_ORDERS_LIST_READY, itemsReady);
-                    editor2.commit();
+                    editor2.apply();
 
                     SharedPreferences sharedPref = getSharedPreferences(FoodifyTags.BILL_VALUE, Context.MODE_PRIVATE);
 
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putFloat(FoodifyTags.BILL_VALUE, savedBillValue);
-                    editor.commit();
+                    editor.apply();
 
                     mAccountTextView.setVisibility(View.GONE);
                     mTotalBillTextView.setVisibility(View.GONE);

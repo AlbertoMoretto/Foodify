@@ -49,7 +49,7 @@ public class AccountActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putFloat(FoodifyTags.BILL_VALUE, savedBillValue);
-        editor.commit();
+        editor.apply();
         setResult(RESULT_OK,intent);
         finish();
     }
@@ -61,7 +61,7 @@ public class AccountActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putFloat(FoodifyTags.BILL_VALUE, savedBillValue);
-        editor.commit();
+        editor.apply();
 
 
     }

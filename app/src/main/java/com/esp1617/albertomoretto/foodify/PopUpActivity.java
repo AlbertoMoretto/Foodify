@@ -65,7 +65,6 @@ public class PopUpActivity extends AppCompatActivity {
 
     ArrayAdapter<String> breadAdapter, meatAdapter, sizeAdapter, typeAdapter;
     List<String> breadList, meatList,sizeList, typeList;
-    private final int zeroValue=0;
 
     private void setOrder(float price, String order) {
         Intent data = new Intent();
