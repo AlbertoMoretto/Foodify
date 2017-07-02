@@ -11,6 +11,16 @@ import android.graphics.Color;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
+
+/**
+ * Sottoclasse di BroadcastReceiver per gestire il pagamento di uno o più ordini direttamente dal
+ * tasto PAY della notifica, nel caso i soldi presenti nell'account non siano sufficienti al pagamento
+ * viene aggiornata la notifica (con un messaggio di fallito pagamento) e richiesto di pagare l'ordine
+ * aprendo l'apposita activity (CheckOutActivity),
+ * In caso di pagamento riuscito viene aggiornata la notifica con un messaggio di pagamento riuscito
+ * e aggiornati i valori dell'applicazione (valore account, valore conto ordini in sospeso, lista elementi
+ * non ancora pagati).
+ */
 public class PayReceiver extends BroadcastReceiver {
     private float billsTotal;
     private float myAccount;
